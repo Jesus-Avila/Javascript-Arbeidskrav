@@ -1,3 +1,5 @@
+let characterData; // Definerer en global variabel for å lagre karakterdata
+
 const fetchData = () => {
   fetch("https://fortnite-api.com/v2/cosmetics/br/new")
     .then((response) => {
@@ -7,8 +9,8 @@ const fetchData = () => {
       return response.json();
     })
     .then((responseData) => {
-      const data = responseData.data.items;
-      characterCard(data, 10);
+      characterData = responseData.data.items;
+      characterCard(characterData, 10);
     })
     .catch((error) => console.error("Error fetching data:", error));
 };
@@ -17,7 +19,7 @@ fetchData();
 
 const characterCard = (data, numberOfCharacters) => {
   const characterListDiv = document.getElementById("characterContainer");
-  characterListDiv.innerHTML = ""; // Clear previous content
+  characterListDiv.innerHTML = "";
 
   for (let i = 0; i < numberOfCharacters; i++) {
     const randomIndex = Math.floor(Math.random() * data.length);
@@ -66,8 +68,7 @@ const characterCard = (data, numberOfCharacters) => {
     //Kalle funksjonen navigateToInfoPage ved klikk på karakter kortet
     characterDiv.addEventListener("click", () => {
       navigateToInfoPage(character.id);
-    })
-
+    });
 
     characterDiv.appendChild(nameElement);
     characterDiv.appendChild(imageElement);
@@ -86,4 +87,18 @@ const addFavourite = (character) => {
 //Navigerer til info.html med id til valgt karakter
 const navigateToInfoPage = (id) => {
   window.location.href = `info.html?cosmeticID=${encodeURIComponent(id)}`;
-}
+};
+
+// Søkefunksjon
+const searchInput = document.getElementById("search-input");
+searchInput.style.color = "black";
+
+searchInput.addEventListener("keydown", (event) => {
+  if (event.key === "Enter") {
+    const searchTerm = searchInput.value.toLowerCase();
+    const filteredCharacters = characterData.filter((character) =>
+      character.name.toLowerCase().includes(searchTerm)
+    );
+    characterCard(filteredCharacters, filteredCharacters.length);
+  }
+});
