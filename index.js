@@ -8,7 +8,7 @@ const fetchData = () => {
       })
       .then((responseData) => {
           const data = responseData.data;
-          characterCard(data, 10); // Change 5 to the number of characters you want to fetch
+          characterCard(data, 10); 
       })
       .catch((error) => console.error("Error fetching data:", error));
 };
