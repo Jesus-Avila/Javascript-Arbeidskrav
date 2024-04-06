@@ -8,7 +8,7 @@ const fetchData = () => {
       })
       .then((responseData) => {
           const data = responseData.data;
-          characterCard(data, 5); // Change 5 to the number of characters you want to fetch
+          characterCard(data, 10); // Change 5 to the number of characters you want to fetch
       })
       .catch((error) => console.error("Error fetching data:", error));
 };
@@ -18,7 +18,7 @@ fetchData();
 const characterCard = (data, numberOfCharacters) => {
   const characterListDiv = document.getElementById("characterContainer");
   characterListDiv.innerHTML = ""; // Clear previous content
-  
+
   //Henter ut random karakter når siden oppdateres
   for (let i = 0; i < numberOfCharacters; i++) {
       const randomIndex = Math.floor(Math.random() * data.length);
