@@ -19,6 +19,9 @@ const characterCard = (data, numberOfCharacters) => {
   const characterListDiv = document.getElementById("characterContainer");
   characterListDiv.innerHTML = ""; // Clear previous content
 
+  //Henter bare karakterer som har bilder
+  const charactersWithImage = data.filter(character => character.imageUrl);
+
   //Henter ut random karakter når siden oppdateres
   for (let i = 0; i < numberOfCharacters; i++) {
       const randomIndex = Math.floor(Math.random() * data.length);
