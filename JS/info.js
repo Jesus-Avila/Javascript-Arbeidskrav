@@ -1,7 +1,5 @@
 
-const baseURL = 'https://fortnite-api.com/v2/cosmetics/br/'
-const cosmeticID = 'Backpack_BrakePedal'
-
+const baseURL = 'https://fortnite-api.com/v2/cosmetics/br/';
 
 const namePlaceholder = document.querySelector('#cosmeticName');
 const cosmeticImageContainer = document.querySelector('#cosmeticImageContainer');
@@ -9,9 +7,9 @@ const cosmeticDescription = document.querySelector('#cosmeticDescription');
 const cosmeticRarity = document.querySelector('#cosmeticRarity');
 
 
-async function fetchCosmetic() {
+async function fetchCosmetic(newCosmeticID) {
     try {
-        const response = await fetch(baseURL + cosmeticID);
+        const response = await fetch(baseURL + newCosmeticID);
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
@@ -41,13 +39,21 @@ function displayCosmetic(data) {
     cosmeticDescription.innerHTML = data.data.description;
 }
 
-async function fetchAndDisplayCosmetic() {
+
+async function fetchAndDisplayCosmetic(newCosmeticID) {
     try {
-        const data = await fetchCosmetic();
+        const data = await fetchCosmetic(newCosmeticID);
         displayCosmetic(data);
     } catch (error) {
         console.error('Error:', error);
     }
 }
 
-document.addEventListener('DOMContentLoaded', fetchAndDisplayCosmetic);
+// Henter ut URL parameteren(ID'en til cosmetic) og kaller på fetchAndDisplayCosmetic
+document.addEventListener('DOMContentLoaded', () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const newCosmeticID = urlParams.get('cosmeticID');
+
+    console.log('newCosmeticID:', newCosmeticID);
+    fetchAndDisplayCosmetic(newCosmeticID);
+})

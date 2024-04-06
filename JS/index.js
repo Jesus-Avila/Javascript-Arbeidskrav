@@ -63,6 +63,12 @@ const characterCard = (data, numberOfCharacters) => {
       alert("Added to favourites!");
     });
 
+    //Kalle funksjonen navigateToInfoPage ved klikk på karakter kortet
+    characterDiv.addEventListener("click", () => {
+      navigateToInfoPage(character.id);
+    })
+
+
     characterDiv.appendChild(nameElement);
     characterDiv.appendChild(imageElement);
     characterDiv.appendChild(heartIcon);
@@ -76,3 +82,8 @@ const addFavourite = (character) => {
   favoriteList.push(character);
   localStorage.setItem("favoriteList", JSON.stringify(favoriteList));
 };
+
+//Navigerer til info.html med id til valgt karakter
+const navigateToInfoPage = (id) => {
+  window.location.href = `info.html?cosmeticID=${encodeURIComponent(id)}`;
+}
