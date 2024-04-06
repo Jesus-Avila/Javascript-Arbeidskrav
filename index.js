@@ -1,5 +1,5 @@
 const fetchData = () => {
-  fetch("https://api.disneyapi.dev/character")
+  fetch("https://fortnite-api.com/v2/cosmetics/br/new")
       .then((response) => {
           if (!response.ok) {
               throw new Error("Network response was not ok");
@@ -7,7 +7,7 @@ const fetchData = () => {
           return response.json();
       })
       .then((responseData) => {
-          const data = responseData.data;
+          const data = responseData.data.items;
           characterCard(data, 10); 
       })
       .catch((error) => console.error("Error fetching data:", error));
@@ -19,26 +19,23 @@ const characterCard = (data, numberOfCharacters) => {
   const characterListDiv = document.getElementById("characterContainer");
   characterListDiv.innerHTML = ""; // Clear previous content
 
-  //Henter bare karakterer som har bilder
-  const charactersWithImage = data.filter(character => character.imageUrl);
-
-  //Henter ut random karakter når siden oppdateres
   for (let i = 0; i < numberOfCharacters; i++) {
       const randomIndex = Math.floor(Math.random() * data.length);
       const character = data[randomIndex];
+      
+      const image = character.images.icon;
 
-      const image = character.imageUrl;
-      //Div
       const characterDiv = document.createElement("div");
       characterDiv.classList.add("character");
-      //navn
+
       const nameElement = document.createElement("p");
-      nameElement.textContent = `Name: ${character.name}`;
-      //bilde
+      nameElement.textContent = `${character.name}`;
+      nameElement.style.fontSize = "40px";
+
       const imageElement = document.createElement("img");
       imageElement.src = image;
       imageElement.alt = character.name;
-      //Hjerteikon
+
       const heartIcon = document.createElement("i");
       heartIcon.classList.add("fa", "fa-heart", "heartIcon");
       heartIcon.style.fontSize = "36px";
@@ -49,10 +46,10 @@ const characterCard = (data, numberOfCharacters) => {
       heartIcon.style.zIndex = "999";
       heartIcon.style.margin = "20px";
 
-      //Legge til elementene
       characterDiv.appendChild(nameElement);
       characterDiv.appendChild(imageElement);
       characterDiv.appendChild(heartIcon);
       characterListDiv.appendChild(characterDiv);
   }
 };
+
