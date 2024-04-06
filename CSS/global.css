@@ -41,3 +41,128 @@
     color: white;
     margin-left: 40px;
   }
+
+  /*footer-section*/
+
+  footer {
+    display: flex;
+    text-align: left;
+    flex-wrap: wrap;
+    background-color: rgba(240, 248, 255, 0.233);
+  }
+  
+  .social-container {
+    padding-left: 1rem;
+  }
+  .social-container h6 {
+    font-size: 1.3rem;
+    padding-left: 0.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .social-container img {
+    width: 40px;
+    height: 40px;
+    padding: 0.4rem;
+  }
+  
+  .footer-copyright {
+    font-size: 1.1rem;
+    color: black;
+    padding-left: 0.5rem;
+    margin-top: 1.5rem;
+  }
+  
+  @media only screen and (max-width: 768px) {
+    .logo {
+      font-size: 4rem; /*redusert størrelsen*/
+    }
+  
+    li {
+      font-size: 1rem; /* her reduserer jeg font størrelsen til linkene*/
+      margin: 0.8rem; /* minker avstand mellom linkene*/
+    }
+  
+    .welcome {
+      margin-top: 1em;
+      font-size: 2.3rem;
+    }
+  
+    .hero-section p {
+      font-size: 1rem; /*redusere str*/
+    }
+  
+    .image-container img {
+      height: 100%;
+    }
+  
+    .image-container p {
+      font-size: 0.8rem;
+    }
+  
+    /*Bildegalleri*/
+    .grid-container {
+      /* dette er parent element, mens de under er child element*/
+      grid-template-columns: 1fr 1fr; /* her definerer jeg antall kolloner og str. på dem*/
+      margin: 2rem; /*Lagt margin rundt hele*/
+      padding: 1rem 0rem;
+    }
+  
+    footer {
+      margin-top: 5rem;
+    }
+  }
+  
+  @media only screen and (max-width: 375px) {
+    /*mobil-størrelse*/
+  
+    body {
+      height: 100vh;
+    }
+  
+    .logo {
+      margin-top: 0;
+      margin-left: 0;
+    }
+  
+    span {
+      font-size: 2.3rem;
+    }
+  
+    li {
+      font-size: 1rem; /* her øker jeg størrelsen*/
+      margin: 0.5rem; /* her har jeg redusert avstanden mellom lenkene*/
+      margin-left: 10rem; /*tar avstand fra venstre*/
+    }
+  
+    .welcome {
+      margin-top: 6em; /* her har jeg gjort litt justeringer på overskrift/tekst*/
+      font-size: 1.8rem;
+    }
+  
+    .gallery-section {
+      margin-left: 2em;
+    }
+  
+    .section2 {
+      margin-left: 3.5em;
+    }
+  
+    .line {
+      width: 100vh;
+    }
+  
+    .grid-container {
+      grid-template-columns: 1fr; /* Endrer til 1 kolonne på mobil skjerm */
+      margin: 1rem 4.5rem;
+    }
+  
+    .grid-container img {
+      width: 50vh;
+    }
+  
+    footer {
+      width: 100vh;
+    }
+  }
+  
