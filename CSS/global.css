@@ -7,8 +7,12 @@
     color: white;
   }
 
+  body{
+    background-color: black;
+  }
 
-  //header
+
+/*header*/
 
   ul {
     display: flex;
