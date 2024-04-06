@@ -28,24 +28,24 @@ const characterCard = (data, numberOfCharacters) => {
     const characterDiv = document.createElement("div");
     characterDiv.classList.add("character");
     characterDiv.style.backgroundColor = "#20263d";
- characterDiv.style.position = "relative"
+    characterDiv.style.position = "relative";
+    characterDiv.style.borderRadius = "10px";
 
- //Karakter text
+    //Karakter text
     const nameElement = document.createElement("p");
     nameElement.textContent = `${character.name}`;
     nameElement.style.fontSize = "36px";
-    nameElement.style.position = "absolute"
-    nameElement.style.bottom = "0"
-    nameElement.style.margin = "20px"
+    nameElement.style.position = "absolute";
+    nameElement.style.bottom = "0";
+    nameElement.style.margin = "20px";
 
     //Karakterbilde
     const imageElement = document.createElement("img");
     imageElement.src = image;
     imageElement.alt = character.name;
-    imageElement.style.width = "300px"
-    imageElement.style.height = "400px"
-    imageElement.style.objectFit = "cover"
-
+    imageElement.style.width = "300px";
+    imageElement.style.height = "400px";
+    imageElement.style.objectFit = "cover";
 
     const heartIcon = document.createElement("i");
     heartIcon.classList.add("fa", "fa-heart", "heartIcon");
@@ -56,7 +56,6 @@ const characterCard = (data, numberOfCharacters) => {
     heartIcon.style.right = "0";
     heartIcon.style.zIndex = "999";
     heartIcon.style.margin = "20px";
-  
 
     //Eventlistener og kaller på funksjonen addFavourite
     heartIcon.addEventListener("click", () => {
