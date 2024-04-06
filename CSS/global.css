@@ -1,3 +1,13 @@
+/*
+Darktheme palett
+bakgrunnsfarge body/navbar #071029
+bakgrunnsfarge kort #20263d
+knapper: #383d53
+sidebar osv: #525669
+#6d6f81
+#888a99
+*/
+
 * {
     margin: 0;
     padding: 0;
@@ -8,7 +18,7 @@
   }
 
 body{
-  background-color:#010710;
+  background-color:#071029;
 }
 
 
