@@ -36,6 +36,9 @@ function displayCosmetic(data) {
 
     // Display rarity of cosmetic
     cosmeticRarity.innerHTML = data.data.rarity.displayValue;
+
+    // Display description of cosmetic
+    cosmeticDescription.innerHTML = data.data.description;
 }
 
 async function fetchAndDisplayCosmetic() {
@@ -46,3 +49,5 @@ async function fetchAndDisplayCosmetic() {
         console.error('Error:', error);
     }
 }
+
+document.addEventListener('DOMContentLoaded', fetchAndDisplayCosmetic);

@@ -14,20 +14,40 @@
   padding: 40px;
   margin: 40px auto;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   gap: 20px;
   border-radius: 20px;
   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
 }
 
+/* Top section of card where back button is */
+.top-cosmetic-card {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.top-cosmetic-card img {
+  height: 30px;
+  vertical-align: middle;
+}
+
+
+/* Main part of the card */
+.bottom-cosmetic-card {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
 .cosmetic-image img {
-  height: 50vh;
+  height: 100%;
 }
 
 h2 {
   color: white;
-  font-size: 2.5rem;
+  font-size: 3rem;
 }
 
 .cosmetic-rarity {
