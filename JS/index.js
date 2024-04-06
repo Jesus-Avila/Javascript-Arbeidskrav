@@ -22,29 +22,41 @@ const characterCard = (data, numberOfCharacters) => {
   for (let i = 0; i < numberOfCharacters; i++) {
     const randomIndex = Math.floor(Math.random() * data.length);
     const character = data[randomIndex];
-
     const image = character.images.icon;
 
+    //Karakter div
     const characterDiv = document.createElement("div");
     characterDiv.classList.add("character");
+    characterDiv.style.backgroundColor = "#20263d";
+ characterDiv.style.position = "relative"
 
+ //Karakter text
     const nameElement = document.createElement("p");
     nameElement.textContent = `${character.name}`;
-    nameElement.style.fontSize = "40px";
+    nameElement.style.fontSize = "36px";
+    nameElement.style.position = "absolute"
+    nameElement.style.bottom = "0"
+    nameElement.style.margin = "20px"
 
+    //Karakterbilde
     const imageElement = document.createElement("img");
     imageElement.src = image;
     imageElement.alt = character.name;
+    imageElement.style.width = "300px"
+    imageElement.style.height = "400px"
+    imageElement.style.objectFit = "cover"
+
 
     const heartIcon = document.createElement("i");
     heartIcon.classList.add("fa", "fa-heart", "heartIcon");
     heartIcon.style.fontSize = "36px";
-    heartIcon.style.opacity = "50%";
+    heartIcon.style.opacity = "100%";
     heartIcon.style.position = "absolute";
     heartIcon.style.top = "0";
     heartIcon.style.right = "0";
     heartIcon.style.zIndex = "999";
     heartIcon.style.margin = "20px";
+  
 
     //Eventlistener og kaller på funksjonen addFavourite
     heartIcon.addEventListener("click", () => {
