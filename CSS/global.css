@@ -8,7 +8,7 @@
   }
 
 body{
-  background-color:#020b19;
+  background-color:#010710;
 }
 
 
@@ -28,7 +28,7 @@ body{
   
   nav {
     padding: 40px;
-    background-color:#020b19;
+    background-color:#010710;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -48,7 +48,7 @@ body{
     display: flex;
     text-align: left;
     flex-wrap: wrap;
-    background-color:#020b19;
+    background-color:#010710;
   }
   
   .social-container {
