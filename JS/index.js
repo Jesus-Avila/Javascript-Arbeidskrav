@@ -91,7 +91,10 @@ const navigateToInfoPage = (id) => {
 
 // Søkefunksjon
 const searchInput = document.getElementById("search-input");
+
 searchInput.style.color = "black";
+searchInput.style.border = "1px solid #ccc";
+searchInput.style.padding = "15px";
 
 searchInput.addEventListener("keydown", (event) => {
   if (event.key === "Enter") {
