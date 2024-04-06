@@ -39,7 +39,7 @@ const characterCard = (data, numberOfCharacters) => {
     const heartIcon = document.createElement("i");
     heartIcon.classList.add("fa", "fa-heart", "heartIcon");
     heartIcon.style.fontSize = "36px";
-    heartIcon.style.opacity = "50%";
+    heartIcon.style.opacity = "80%";
     heartIcon.style.position = "absolute";
     heartIcon.style.top = "0";
     heartIcon.style.right = "0";
