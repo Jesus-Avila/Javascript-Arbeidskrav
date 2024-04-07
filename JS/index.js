@@ -26,11 +26,39 @@ const characterCard = (data, numberOfCharacters) => {
     const character = data[randomIndex];
     const image = character.images.icon;
 
+        // bestemmer farge basert på rarity
+        let backgroundColor;
 
+        switch (character.rarity.value.toLowerCase()) {
+          case "uncommon":
+            backgroundColor = "green";
+            break;
+          case "common":
+            backgroundColor = "grey";
+            break;
+          case "rare":
+            backgroundColor = "blue";
+            break;
+          case "epic":
+            backgroundColor = "purple";
+            break;
+          case "legendary":
+            backgroundColor = "orange";
+            break;
+          case "mythic":
+            backgroundColor = "yellow";
+            break;
+          case "exotic":
+            backgroundColor = "turquoise";
+            break;
+          default:
+            backgroundColor = "#20263d"; // Default color
+        }
+    
     //Karakter div
     const characterDiv = document.createElement("div");
     characterDiv.classList.add("character");
-    characterDiv.style.backgroundColor = "#20263d";
+    characterDiv.style.backgroundColor = backgroundColor;
     characterDiv.style.position = "relative";
     characterDiv.style.borderRadius = "10px";
     characterDiv.style.cursor = "pointer";
