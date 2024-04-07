@@ -57,6 +57,10 @@ ul li {
   margin-right: 40px;
   color: white;
 }
+ul li a:hover{
+  color:#9f32ac;
+  transition: 0.3s;
+}
 
 ul li a {
   text-decoration: none;

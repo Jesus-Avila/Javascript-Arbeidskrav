@@ -5,7 +5,7 @@
   background-size: cover;
   background-position: top;
   display: flex;
-  align-items: left;
+  align-items: center;
   justify-content: center;
   flex-direction: column;
   margin-bottom: 40px;
@@ -37,7 +37,7 @@ h2 {
 }
 
 .heartIcon:hover{
-color:#78367f;
+color:#9f32ac;
 animation: pulse 1s infinite alternate;
 }
 
