@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
     fetchAndDisplayCosmetic(newCosmeticID);
 })
 // Tilbake pil på info-siden
-const backToHomeArrow = document.querySelector(".chevron-left");
+const backToHomeArrow = document.querySelector(".cosmetic-card");
 
 backToHomeArrow.addEventListener("click", () => {
 
