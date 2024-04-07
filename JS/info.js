@@ -109,7 +109,9 @@ addFavouriteButton.addEventListener('click', () => {
         changeButtonText();
         alert("Added to favourites!");
     } else {
-        alert("This cosmetic is already in your favourites!");
+        removeFavorite(data);
+        changeButtonText();
+        alert("Removed from favourites!");
 }})
 
 // Funksjon for å legge til favoritt
@@ -118,6 +120,13 @@ const addFavourite = (data) => {
     favoriteList.push(data);
     localStorage.setItem("favoriteList", JSON.stringify(favoriteList));
   };
+
+  // Funksjon for slette favoritt
+    const removeFavorite = (data) => {
+        let favoriteList = JSON.parse(localStorage.getItem("favoriteList")) || [];
+        favoriteList = favoriteList.filter((favorite) => favorite.id !== data.id);
+        localStorage.setItem("favoriteList", JSON.stringify(favoriteList));
+    };
 
   // Funksjon for å sjekke om favoritt er lagt til
     const checkIfFavorite = (data) => {
