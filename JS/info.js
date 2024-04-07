@@ -51,6 +51,7 @@ async function fetchAndDisplayCosmetic(newCosmeticID) {
     try {
         data = await fetchCosmetic(newCosmeticID);
         displayCosmetic(data);
+        changeButtonText();
     } catch (error) {
         console.error('Error:', error);
     }
@@ -105,6 +106,7 @@ const addFavouriteButton = document.querySelector('#addToFavoritesBtn');
 addFavouriteButton.addEventListener('click', () => {
     if(!checkIfFavorite(data)) {
         addFavourite(data);
+        changeButtonText();
         alert("Added to favourites!");
     } else {
         alert("This cosmetic is already in your favourites!");
@@ -122,5 +124,11 @@ const addFavourite = (data) => {
         let favoriteList = JSON.parse(localStorage.getItem("favoriteList")) || [];
         console.log('favoriteList:', favoriteList);
         let isFavorite = favoriteList.some((favorite) => favorite.id === data.id);
+        console.log('isFavorite:', isFavorite);
         return isFavorite;
     };
+
+// Funksjon for å endre tekst på knapp basert på om favoritt er lagt til
+function changeButtonText() {
+    checkIfFavorite(data) ? addFavouriteButton.innerHTML = "Remove from favourites" : addFavouriteButton.innerHTML = "Add to favourites";
+}
