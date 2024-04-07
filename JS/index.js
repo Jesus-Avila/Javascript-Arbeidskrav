@@ -90,17 +90,17 @@ const navigateToInfoPage = (id) => {
 };
 
 // Søkefunksjon
-const searchInput = document.getElementById("search-input");
+const searchField = document.getElementById("search-field");
 
-searchInput.style.color = "black";
-searchInput.style.border = "1px solid #ccc";
-searchInput.style.padding = "15px";
+searchField.style.color = "black";
+searchField.style.border = "1px solid #ccc";
+searchField.style.padding = "15px";
 
-searchInput.addEventListener("keydown", (event) => {
+searchField.addEventListener("keydown", (event) => {
   if (event.key === "Enter") {
-    const searchTerm = searchInput.value.toLowerCase();
+    const searchInput = searchField.value.toLowerCase();
     const filteredCharacters = characterData.filter((character) =>
-      character.name.toLowerCase().includes(searchTerm)
+      character.name.toLowerCase().includes(searchInput)
     );
     characterCard(filteredCharacters, filteredCharacters.length);
   }
