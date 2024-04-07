@@ -8,7 +8,7 @@ const cosmeticDescription = document.querySelector('#cosmeticDescription');
 const cosmeticRarity = document.querySelector('#cosmeticRarity');
 const cosmeticInfoCard = document.querySelector('#cosmeticInfoCard');
 
-
+// Fetcher data fra API
 async function fetchCosmetic(newCosmeticID) {
     try {
         const response = await fetch(baseURL + newCosmeticID);
@@ -17,34 +17,36 @@ async function fetchCosmetic(newCosmeticID) {
         }
         const data = await response.json();
         console.log('from fetchcosm', data);
-        console.log('for color change', data.data.rarity.value.toLowerCase());
-        return data;
+        console.log('from fetcdsfdshcosm', data.data);
+        return data.data;
     } catch (error) {
         console.error('Error:', error);
     }    
 }
 
+// Display av data
 function displayCosmetic(data) {
     // Create and display of image
     const cosmeticImage = document.createElement('img');
-    cosmeticImage.src = data.data.images.icon;
+    cosmeticImage.src = data.images.icon;
     cosmeticImage.style.width = '100%';
     cosmeticImage.style.overflow = 'hidden';
     cosmeticImageContainer.append(cosmeticImage);
 
     // Display name of cosmetic
-    namePlaceholder.innerHTML = data.data.name;
+    namePlaceholder.innerHTML = data.name;
 
     // Display rarity of cosmetic
-    cosmeticRarity.innerHTML = data.data.rarity.displayValue;
+    cosmeticRarity.innerHTML = data.rarity.displayValue;
 
     // Display description of cosmetic
-    cosmeticDescription.innerHTML = data.data.description;
+    cosmeticDescription.innerHTML = data.description;
 
     // Change background color of cosmetic card based on rarity
     changeCardColor(data);
 }
 
+// Fetcher data og kaller på displayCosmetic
 async function fetchAndDisplayCosmetic(newCosmeticID) {
     try {
         data = await fetchCosmetic(newCosmeticID);
@@ -69,9 +71,9 @@ backToHomeArrow.addEventListener("click", () => {
     window.location.href = "index.html";
 });
 
-    // Endre bakgrunnsfarge basert på rarity
+// Endre bakgrunnsfarge basert på rarity
 function changeCardColor (data) {
-    switch (data.data.rarity.value.toLowerCase()) {
+    switch (data.rarity.value.toLowerCase()) {
       case "uncommon":
         cosmeticInfoCard.style.backgroundColor = "green";
         break;
@@ -101,13 +103,24 @@ function changeCardColor (data) {
 // Eventlistener og kaller på funksjonen addFavourite
 const addFavouriteButton = document.querySelector('#addToFavoritesBtn');
 addFavouriteButton.addEventListener('click', () => {
-    addFavourite(data);
-    alert("Added to favourites!");
-})
+    if(!checkIfFavorite(data)) {
+        addFavourite(data);
+        alert("Added to favourites!");
+    } else {
+        alert("This cosmetic is already in your favourites!");
+}})
 
 // Funksjon for å legge til favoritt
 const addFavourite = (data) => {
     let favoriteList = JSON.parse(localStorage.getItem("favoriteList")) || [];
-    favoriteList.push(data.data);
+    favoriteList.push(data);
     localStorage.setItem("favoriteList", JSON.stringify(favoriteList));
   };
+
+  // Funksjon for å sjekke om favoritt er lagt til
+    const checkIfFavorite = (data) => {
+        let favoriteList = JSON.parse(localStorage.getItem("favoriteList")) || [];
+        console.log('favoriteList:', favoriteList);
+        let isFavorite = favoriteList.some((favorite) => favorite.id === data.id);
+        return isFavorite;
+    };

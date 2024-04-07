@@ -91,9 +91,12 @@ const characterCard = (data, numberOfCharacters) => {
 
     //Eventlistener og kaller på funksjonen addFavourite
     heartIcon.addEventListener("click", () => {
-      addFavourite(character);
-      alert("Added to favourites!");
-    });
+      if(!checkIfFavorite(character)) {
+        addFavourite(character);
+        alert("Added to favourites!");
+    } else {
+        alert("This cosmetic is already in your favourites!");
+  }})
 
     //Kalle funksjonen navigateToInfoPage ved klikk på karakter kortet
     imageElement.addEventListener("click", () => {
@@ -135,3 +138,12 @@ searchField.addEventListener("keydown", (event) => {
     characterCard(filteredCharacters, filteredCharacters.length);
   }
 });
+
+
+// Funksjon for å sjekke om et element er i favoritter
+const checkIfFavorite = (data) => {
+  let favoriteList = JSON.parse(localStorage.getItem("favoriteList")) || [];
+  console.log('favoriteList:', favoriteList);
+  let isFavorite = favoriteList.some((favorite) => favorite.id === data.id);
+  return isFavorite;
+};
