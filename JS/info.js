@@ -6,7 +6,7 @@ const namePlaceholder = document.querySelector('#cosmeticName');
 const cosmeticImageContainer = document.querySelector('#cosmeticImageContainer');
 const cosmeticDescription = document.querySelector('#cosmeticDescription');
 const cosmeticRarity = document.querySelector('#cosmeticRarity');
-const comseticInfoCard = document.querySelector('#cosmeticInfoCard');
+const cosmeticInfoCard = document.querySelector('#cosmeticInfoCard');
 
 
 async function fetchCosmetic(newCosmeticID) {
@@ -47,7 +47,7 @@ function displayCosmetic(data) {
 
 async function fetchAndDisplayCosmetic(newCosmeticID) {
     try {
-        const data = await fetchCosmetic(newCosmeticID);
+        data = await fetchCosmetic(newCosmeticID);
         displayCosmetic(data);
     } catch (error) {
         console.error('Error:', error);
@@ -73,28 +73,28 @@ backToHomeArrow.addEventListener("click", () => {
 function changeCardColor (data) {
     switch (data.data.rarity.value.toLowerCase()) {
       case "uncommon":
-        comseticInfoCard.style.backgroundColor = "green";
+        cosmeticInfoCard.style.backgroundColor = "green";
         break;
       case "common":
-        comseticInfoCard.style.backgroundColor = "grey";
+        cosmeticInfoCard.style.backgroundColor = "grey";
         break;
       case "rare":
-        comseticInfoCard.style.backgroundColor = "blue";
+        cosmeticInfoCard.style.backgroundColor = "blue";
         break;
       case "epic":
-        comseticInfoCard.style.backgroundColor = "purple";
+        cosmeticInfoCard.style.backgroundColor = "purple";
         break;
       case "legendary":
-        comseticInfoCard.style.backgroundColor = "orange";
+        cosmeticInfoCard.style.backgroundColor = "orange";
         break;
       case "mythic":
-        comseticInfoCard.style.backgroundColor = "yellow";
+        cosmeticInfoCard.style.backgroundColor = "yellow";
         break;
       case "exotic":
-        comseticInfoCard.style.backgroundColor = "turquoise";
+        cosmeticInfoCard.style.backgroundColor = "turquoise";
         break;
       default:
-        comseticInfoCard.style.backgroundColor = "#20263d"; // Default color
+        cosmeticInfoCard.style.backgroundColor = "#20263d"; // Default color
     }
 }
 
@@ -108,6 +108,6 @@ addFavouriteButton.addEventListener('click', () => {
 // Funksjon for å legge til favoritt
 const addFavourite = (data) => {
     let favoriteList = JSON.parse(localStorage.getItem("favoriteList")) || [];
-    favoriteList.push(data);
+    favoriteList.push(data.data);
     localStorage.setItem("favoriteList", JSON.stringify(favoriteList));
   };
