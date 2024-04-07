@@ -66,7 +66,7 @@ const characterCard = (data, numberOfCharacters) => {
     });
 
     //Kalle funksjonen navigateToInfoPage ved klikk på karakter kortet
-    characterDiv.addEventListener("click", () => {
+    imageElement.addEventListener("click", () => {
       navigateToInfoPage(character.id);
     });
 
