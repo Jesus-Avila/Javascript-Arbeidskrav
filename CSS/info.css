@@ -33,6 +33,21 @@
   vertical-align: middle;
 }
 
+.chevron-text-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 5px;
+}
+
+.chevron-text-container:hover {
+  text-decoration: underline;
+}
+
+.chevron-text-container {
+  cursor: pointer;
+}
+
 
 /* Main part of the card */
 .bottom-cosmetic-card {

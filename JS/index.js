@@ -26,12 +26,14 @@ const characterCard = (data, numberOfCharacters) => {
     const character = data[randomIndex];
     const image = character.images.icon;
 
+
     //Karakter div
     const characterDiv = document.createElement("div");
     characterDiv.classList.add("character");
     characterDiv.style.backgroundColor = "#20263d";
     characterDiv.style.position = "relative";
     characterDiv.style.borderRadius = "10px";
+    characterDiv.style.cursor = "pointer";
 
     //Karakter text
     const nameElement = document.createElement("p");

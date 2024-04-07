@@ -1,5 +1,6 @@
 
 const baseURL = 'https://fortnite-api.com/v2/cosmetics/br/';
+let data;
 
 const namePlaceholder = document.querySelector('#cosmeticName');
 const cosmeticImageContainer = document.querySelector('#cosmeticImageContainer');
@@ -57,10 +58,26 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('newCosmeticID:', newCosmeticID);
     fetchAndDisplayCosmetic(newCosmeticID);
 })
+
+
 // Tilbake pil på info-siden
-const backToHomeArrow = document.querySelector(".cosmetic-card");
+const backToHomeArrow = document.querySelector("#chevronTextContainer");
+// backToHomeArrow.style.cursor = "pointer";
 
 backToHomeArrow.addEventListener("click", () => {
-
     window.location.href = "index.html";
 });
+
+// Eventlistener og kaller på funksjonen addFavourite
+const addFavouriteButton = document.querySelector('#addToFavoritesBtn');
+addFavouriteButton.addEventListener('click', () => {
+    addFavourite(data);
+    alert("Added to favourites!");
+})
+
+// Funksjon for å legge til favoritt
+const addFavourite = (data) => {
+    let favoriteList = JSON.parse(localStorage.getItem("favoriteList")) || [];
+    favoriteList.push(data);
+    localStorage.setItem("favoriteList", JSON.stringify(favoriteList));
+  };
