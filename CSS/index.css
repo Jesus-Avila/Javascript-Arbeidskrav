@@ -15,9 +15,10 @@ h1 {
   font-size: 50px;
   margin-left: 10%;
 }
+
 h2 {
   padding-top: 10px;
-  color: rgba(255, 255, 255, 0.707);
+  color: rgb(255, 255, 255);
   margin-left: 10%;
 }
 
@@ -35,8 +36,16 @@ h2 {
   display: none;
 }
 
-
 .heartIcon:hover{
 color:#78367f;
+animation: pulse 1s infinite alternate;
 }
 
+@keyframes pulse {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.5);
+  }
+}
