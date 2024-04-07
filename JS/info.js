@@ -58,9 +58,9 @@ document.addEventListener('DOMContentLoaded', () => {
     fetchAndDisplayCosmetic(newCosmeticID);
 })
 // Tilbake pil på info-siden
-const backToHomeBtn = document.getElementById("backToHome");
+const backToHomeArrow = document.querySelector(".chevron-left");
 
-backToHomeBtn.addEventListener.addEventListener("click", () =>{
+backToHomeArrow.addEventListener("click", () => {
 
     window.location.href = "index.html";
 });
