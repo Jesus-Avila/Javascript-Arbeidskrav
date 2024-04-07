@@ -57,3 +57,10 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('newCosmeticID:', newCosmeticID);
     fetchAndDisplayCosmetic(newCosmeticID);
 })
+// Tilbake pil på info-siden
+const backToHomeBtn = document.getElementById("backToHome");
+
+backToHomeBtn.addEventListener.addEventListener("click", () =>{
+
+    window.location.href = "index.html";
+});
