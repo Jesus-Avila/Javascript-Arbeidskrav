@@ -55,3 +55,13 @@ h2 {
     transform: scale(1.5);
   }
 }
+
+.search-field{
+  width: 200px;
+background-color: transparent;
+border:none;
+border-bottom: 1px solid white;
+border-bottom-width: 1px;
+margin-left: 4.5rem;
+}
+
