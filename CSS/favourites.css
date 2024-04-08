@@ -3,9 +3,6 @@
     overflow: scroll;
     gap: 20px;
     width: 90%;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 10vh;
   }
   
   .favourite-list::-webkit-scrollbar {
@@ -15,4 +12,12 @@
 h1{
     text-align: center;
     margin-top: 10vh;
+}
+
+.favourites{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap:10vh;
 }
