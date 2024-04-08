@@ -80,15 +80,20 @@ h2 {
   font-size: 1.5rem;
 }
 
-.btn {
+
+#addToFavoritesBtn {
+  background: white;
+  color: #010710;
+  padding: 10px 20px;
+  border-radius: 10px;
   margin-top: 40px;
-  color: black;
-  padding: 5px 10px;
+  color: #010710;
 }
 
-.btn:hover {
-  background: white;
-  color: black;
+
+#addToFavoritesBtn:hover {
+  background: #010710;
+  color: white;
   cursor: pointer;
 }
 
