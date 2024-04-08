@@ -71,23 +71,14 @@ const characterCard = (data, numberOfCharacters) => {
     characterDiv.style.position = "relative";
     characterDiv.style.borderRadius = "10px";
     characterDiv.style.cursor = "pointer";
-
-    //div overlay
-    const overlayDiv = document.createElement("div");
-    overlayDiv.classList.add("overlayDiv");
-    overlayDiv.style.backgroundColor = "black";
-    overlayDiv.style.height = "100%";
-    overlayDiv.style.width = "100%";
-    overlayDiv.style.position = "absolute";
-    overlayDiv.style.inset = "0";
-    overlayDiv.style.opacity = "80%";
-    overlayDiv.addEventListener("mouseenter", () => {
-      overlayDiv.style.display = "none";
+    characterDiv.style.filter = "brightness(0.5)"
+    characterDiv.addEventListener("mouseenter", () => {
+      characterDiv.style.filter = "brightness(1)"; 
     });
-    overlayDiv.addEventListener("mouseleave", () => {
-      overlayDiv.style.display = "block";
-    })
-
+    characterDiv.addEventListener("mouseleave", () => {
+      characterDiv.style.filter = "brightness(0.5)"; 
+    });
+ 
     //Karakter text
     const nameElement = document.createElement("p");
     nameElement.textContent = `${character.name}`;
@@ -104,6 +95,7 @@ const characterCard = (data, numberOfCharacters) => {
     imageElement.style.width = "300px";
     imageElement.style.height = "400px";
     imageElement.style.objectFit = "cover";
+    imageElement.style.zIndex = "1"
 
     const heartIcon = document.createElement("i");
     heartIcon.classList.add("fa", "fa-heart", "heartIcon");
@@ -144,7 +136,6 @@ const characterCard = (data, numberOfCharacters) => {
     characterDiv.appendChild(imageElement);
     characterDiv.appendChild(heartIcon);
     characterListDiv.appendChild(characterDiv);
-    characterDiv.appendChild(overlayDiv);
   }
 };
 
