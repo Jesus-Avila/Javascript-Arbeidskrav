@@ -20,7 +20,7 @@ fetchData();
 // Funksjon for å sjekke om et element er i favoritter
 const checkIfFavorite = (data) => {
   let favoriteList = JSON.parse(localStorage.getItem("favoriteList")) || [];
-  console.log('favoriteList:', favoriteList);
+  console.log("favoriteList:", favoriteList);
   let isFavorite = favoriteList.some((favorite) => favorite.id === data.id);
   return isFavorite;
 };
@@ -41,29 +41,29 @@ const characterCard = (data, numberOfCharacters) => {
     const character = data[randomIndex];
     const image = character.images.icon;
 
-        // bestemmer farge basert på rarity
-        let backgroundColor;
+    // bestemmer farge basert på rarity
+    let backgroundColor;
 
-        switch (character.rarity.value.toLowerCase()) {
-          case "uncommon":
-            backgroundColor = "rgba(0, 128, 0, 0.5)"; 
-            break;
-          case "common":
-            backgroundColor = "rgba(128, 128, 128, 0.5)"; 
-            break;
-          case "rare":
-            backgroundColor = "rgba(0, 0, 255, 0.5)"; 
-            break;
-          case "epic":
-            backgroundColor = "rgba(128, 0, 128, 0.5)"; 
-            break;
-          case "legendary":
-            backgroundColor = "rgba(255, 165, 0, 0.5)"; 
-            break;
-          default:
-            backgroundColor = "rgba(64, 224, 208, 0.5)"; 
-        }
-    
+    switch (character.rarity.value.toLowerCase()) {
+      case "uncommon":
+        backgroundColor = "rgba(0, 128, 0, 0.5)";
+        break;
+      case "common":
+        backgroundColor = "rgba(128, 128, 128, 0.5)";
+        break;
+      case "rare":
+        backgroundColor = "rgba(0, 0, 255, 0.5)";
+        break;
+      case "epic":
+        backgroundColor = "rgba(128, 0, 128, 0.5)";
+        break;
+      case "legendary":
+        backgroundColor = "rgba(255, 165, 0, 0.5)";
+        break;
+      default:
+        backgroundColor = "rgba(64, 224, 208, 0.5)";
+    }
+
     //Karakter div
     const characterDiv = document.createElement("div");
     characterDiv.classList.add("character");
@@ -72,6 +72,16 @@ const characterCard = (data, numberOfCharacters) => {
     characterDiv.style.borderRadius = "10px";
     characterDiv.style.cursor = "pointer";
 
+    //div overlay
+    const overlayDiv = document.createElement("div");
+    overlayDiv.classList.add("overlayDiv");
+    overlayDiv.style.backgroundColor = "black";
+    overlayDiv.style.height = "100%";
+    overlayDiv.style.width = "100%";
+    overlayDiv.style.position = "absolute";
+    overlayDiv.style.inset = "0";
+    overlayDiv.style.opacity = "80%";
+
     //Karakter text
     const nameElement = document.createElement("p");
     nameElement.textContent = `${character.name}`;
@@ -79,6 +89,7 @@ const characterCard = (data, numberOfCharacters) => {
     nameElement.style.position = "absolute";
     nameElement.style.bottom = "0";
     nameElement.style.margin = "20px";
+    nameElement.style.zIndex = "1";
 
     //Karakterbilde
     const imageElement = document.createElement("img");
@@ -101,22 +112,22 @@ const characterCard = (data, numberOfCharacters) => {
 
     //Eventlistener og kaller på funksjonen addFavourite
     heartIcon.addEventListener("click", () => {
-      if(!checkIfFavorite(character)) {
+      if (!checkIfFavorite(character)) {
         addFavourite(character);
         changeHeartColor(character);
         alert("Added to favourites!");
-    } else {
+      } else {
         removeFavorite(character);
         changeHeartColor(character);
         alert("Removed from favourites!");
-  }})
+      }
+    });
 
     // Funkson for å endre farge på hjerteikonet
     const changeHeartColor = (data) => {
-      console.log('changeHeartColor:', data);
-      checkIfFavorite(data) ? heartIcon.style.color = "#9f32ac" : heartIcon.style.color = "white";
-    }
-
+      console.log("changeHeartColor:", data);
+      checkIfFavorite(data) ? (heartIcon.style.color = "#9f32ac") : (heartIcon.style.color = "white");
+    };
 
     //Kalle funksjonen navigateToInfoPage ved klikk på karakter kortet
     imageElement.addEventListener("click", () => {
@@ -127,6 +138,7 @@ const characterCard = (data, numberOfCharacters) => {
     characterDiv.appendChild(imageElement);
     characterDiv.appendChild(heartIcon);
     characterListDiv.appendChild(characterDiv);
+    characterDiv.appendChild(overlayDiv);
   }
 };
 
@@ -152,13 +164,7 @@ searchField.style.padding = "15px";
 searchField.addEventListener("keydown", (event) => {
   if (event.key === "Enter") {
     const searchInput = searchField.value.toLowerCase();
-    const filteredCharacters = characterData.filter((character) =>
-      character.name.toLowerCase().includes(searchInput)
-    );
+    const filteredCharacters = characterData.filter((character) => character.name.toLowerCase().includes(searchInput));
     characterCard(filteredCharacters, filteredCharacters.length);
   }
 });
-
-
-
-
