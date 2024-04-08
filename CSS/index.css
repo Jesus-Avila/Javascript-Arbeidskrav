@@ -36,8 +36,6 @@ h2 {
   margin-top: 10vh;
 }
 
-
-
 .character-container::-webkit-scrollbar {
   display: none;
 }
@@ -56,13 +54,13 @@ h2 {
   }
 }
 
-.search-field{
+.search-field {
   width: 200px;
   font-size: 1.4rem;
-background-color: transparent;
-border:none;
-border-bottom: 1px solid white;
-border-bottom-width: 1px;
-margin-left: 4.5rem;
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid white;
+  border-bottom-width: 1px;
+  margin-left: 4.5rem;
+  padding: 20px 0;
 }
-
