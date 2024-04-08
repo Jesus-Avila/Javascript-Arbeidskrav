@@ -81,6 +81,12 @@ const characterCard = (data, numberOfCharacters) => {
     overlayDiv.style.position = "absolute";
     overlayDiv.style.inset = "0";
     overlayDiv.style.opacity = "80%";
+    overlayDiv.addEventListener("mouseenter", () => {
+      overlayDiv.style.display = "none";
+    });
+    overlayDiv.addEventListener("mouseleave", () => {
+      overlayDiv.style.display = "block";
+    })
 
     //Karakter text
     const nameElement = document.createElement("p");
@@ -141,6 +147,8 @@ const characterCard = (data, numberOfCharacters) => {
     characterDiv.appendChild(overlayDiv);
   }
 };
+
+
 
 //Sender valgte element til localstorage, må hentes ned igjen i favourites.js
 const addFavourite = (character) => {
