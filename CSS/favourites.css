@@ -1,0 +1,9 @@
+.favourites{
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    align-items: center;
+    justify-content: center;
+    gap:2em;
+    margin-top: 10vh;
+}
