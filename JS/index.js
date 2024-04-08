@@ -71,13 +71,13 @@ const characterCard = (data, numberOfCharacters) => {
     characterDiv.style.position = "relative";
     characterDiv.style.borderRadius = "10px";
     characterDiv.style.cursor = "pointer";
-    characterDiv.style.filter = "brightness(0.5)"
+    /*characterDiv.style.filter = "brightness(0.5)"
     characterDiv.addEventListener("mouseenter", () => {
       characterDiv.style.filter = "brightness(1)"; 
-    });
-    characterDiv.addEventListener("mouseleave", () => {
-      characterDiv.style.filter = "brightness(0.5)"; 
-    });
+    })*/
+    /*characterDiv.addEventListener("mouseleave", () => {
+      characterDiv.style.filter = "brightness(0.5)";
+    });*/
  
     //Karakter text
     const nameElement = document.createElement("p");
