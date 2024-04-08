@@ -9,12 +9,17 @@ const showFavorites = () => {
   } else {
     favoriteList.forEach((character) => {
       const characterDiv = document.createElement("div");
-      characterDiv.textContent = `Name: ${character.name}`;
+      characterImg = document.createElement("img");
+      characterImg.src = character.images.icon;
+      characterImg.alt = character.name;
+      characterName = document.createElement("p");
+      characterName.textContent = `${character.name}`
       favoriteListDiv.appendChild(characterDiv);
+      favoriteListDiv.appendChild(characterImg);
+      favoriteListDiv.appendChild(characterName)
     });
   }
 };
-
 showFavorites();
 
 //funksjon som tømmer listen
@@ -25,4 +30,4 @@ const clearFavorites = () => {
 
 //knapp som kaller på funksjonen
 const clearBtn = document.getElementById("clearBtn");
-clearBtn.addEventListener("click", clearFavorites)
+clearBtn.addEventListener("click", clearFavorites);

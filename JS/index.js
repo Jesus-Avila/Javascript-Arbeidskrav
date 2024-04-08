@@ -155,7 +155,6 @@ const navigateToInfoPage = (id) => {
 
 // Søkefunksjon
 const searchField = document.getElementById("search-field");
-
 searchField.style.color = "black";
 searchField.style.border = "1px solid #ccc";
 searchField.style.padding = "15px";
