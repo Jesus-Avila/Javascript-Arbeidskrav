@@ -58,6 +58,7 @@ h2 {
 
 .search-field{
   width: 200px;
+  font-size: 1.4rem;
 background-color: transparent;
 border:none;
 border-bottom: 1px solid white;
