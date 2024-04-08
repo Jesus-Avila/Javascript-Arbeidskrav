@@ -82,7 +82,6 @@ const characterCard = (data, numberOfCharacters) => {
     heartIcon.style.right = "0";
     heartIcon.style.zIndex = "999";
     heartIcon.style.margin = "20px";
-    heartIcon.style.color = checkIfFavorite(character) ? "#9f32ac" : "white";
 
     //Eventlistener og kaller på funksjonen addFavourite
     heartIcon.addEventListener("click", () => {
