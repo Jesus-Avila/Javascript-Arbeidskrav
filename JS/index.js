@@ -10,7 +10,7 @@ const fetchData = () => {
     })
     .then((responseData) => {
       characterData = responseData.data.items;
-      characterCard(characterData, 10);
+      characterCard(characterData, 50);
     })
     .catch((error) => console.error("Error fetching data:", error));
 };
