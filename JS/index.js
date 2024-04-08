@@ -31,28 +31,22 @@ const characterCard = (data, numberOfCharacters) => {
 
         switch (character.rarity.value.toLowerCase()) {
           case "uncommon":
-            backgroundColor = "green";
+            backgroundColor = "rgba(0, 128, 0, 0.5)"; 
             break;
           case "common":
-            backgroundColor = "grey";
+            backgroundColor = "rgba(128, 128, 128, 0.5)"; 
             break;
           case "rare":
-            backgroundColor = "blue";
+            backgroundColor = "rgba(0, 0, 255, 0.5)"; 
             break;
           case "epic":
-            backgroundColor = "purple";
+            backgroundColor = "rgba(128, 0, 128, 0.5)"; 
             break;
           case "legendary":
-            backgroundColor = "orange";
-            break;
-          case "mythic":
-            backgroundColor = "yellow";
-            break;
-          case "exotic":
-            backgroundColor = "turquoise";
+            backgroundColor = "rgba(255, 165, 0, 0.5)"; 
             break;
           default:
-            backgroundColor = "#20263d"; // Default color
+            backgroundColor = "rgba(64, 224, 208, 0.5)"; 
         }
     
     //Karakter div
