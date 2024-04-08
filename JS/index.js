@@ -17,6 +17,21 @@ const fetchData = () => {
 
 fetchData();
 
+// Funksjon for å sjekke om et element er i favoritter
+const checkIfFavorite = (data) => {
+  let favoriteList = JSON.parse(localStorage.getItem("favoriteList")) || [];
+  console.log('favoriteList:', favoriteList);
+  let isFavorite = favoriteList.some((favorite) => favorite.id === data.id);
+  return isFavorite;
+};
+
+// Funksjon for å fjerne et element fra favoritter
+const removeFavorite = (data) => {
+  let favoriteList = JSON.parse(localStorage.getItem("favoriteList")) || [];
+  favoriteList = favoriteList.filter((favorite) => favorite.id !== data.id);
+  localStorage.setItem("favoriteList", JSON.stringify(favoriteList));
+};
+
 const characterCard = (data, numberOfCharacters) => {
   const characterListDiv = document.getElementById("characterContainer");
   characterListDiv.innerHTML = "";
@@ -82,6 +97,7 @@ const characterCard = (data, numberOfCharacters) => {
     heartIcon.style.right = "0";
     heartIcon.style.zIndex = "999";
     heartIcon.style.margin = "20px";
+    heartIcon.style.color = checkIfFavorite(character) ? "#9f32ac" : "white";
 
     //Eventlistener og kaller på funksjonen addFavourite
     heartIcon.addEventListener("click", () => {
@@ -143,18 +159,6 @@ searchField.addEventListener("keydown", (event) => {
   }
 });
 
-// Funksjon for å sjekke om et element er i favoritter
-const checkIfFavorite = (data) => {
-  let favoriteList = JSON.parse(localStorage.getItem("favoriteList")) || [];
-  console.log('favoriteList:', favoriteList);
-  let isFavorite = favoriteList.some((favorite) => favorite.id === data.id);
-  return isFavorite;
-};
 
-// Funksjon for å fjerne et element fra favoritter
-const removeFavorite = (data) => {
-  let favoriteList = JSON.parse(localStorage.getItem("favoriteList")) || [];
-  favoriteList = favoriteList.filter((favorite) => favorite.id !== data.id);
-  localStorage.setItem("favoriteList", JSON.stringify(favoriteList));
-};
+
 

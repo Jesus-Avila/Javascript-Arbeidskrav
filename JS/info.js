@@ -75,28 +75,22 @@ backToHomeArrow.addEventListener("click", () => {
 function changeCardColor (data) {
     switch (data.rarity.value.toLowerCase()) {
       case "uncommon":
-        cosmeticInfoCard.style.backgroundColor = "green";
+        cosmeticInfoCard.style.backgroundColor = "rgba(0, 128, 0, 0.5)";
         break;
       case "common":
-        cosmeticInfoCard.style.backgroundColor = "grey";
+        cosmeticInfoCard.style.backgroundColor = "rgba(128, 128, 128, 0.5)";
         break;
       case "rare":
-        cosmeticInfoCard.style.backgroundColor = "blue";
+        cosmeticInfoCard.style.backgroundColor = "rgba(0, 0, 255, 0.5)";
         break;
       case "epic":
-        cosmeticInfoCard.style.backgroundColor = "purple";
+        cosmeticInfoCard.style.backgroundColor = "rgba(128, 0, 128, 0.5)";
         break;
       case "legendary":
-        cosmeticInfoCard.style.backgroundColor = "orange";
-        break;
-      case "mythic":
-        cosmeticInfoCard.style.backgroundColor = "yellow";
-        break;
-      case "exotic":
-        cosmeticInfoCard.style.backgroundColor = "turquoise";
+        cosmeticInfoCard.style.backgroundColor = "rgba(255, 165, 0, 0.5)";
         break;
       default:
-        cosmeticInfoCard.style.backgroundColor = "#20263d"; // Default color
+        cosmeticInfoCard.style.backgroundColor = "rgba(64, 224, 208, 0.5)"; // Default color
     }
 }
 
@@ -131,6 +125,7 @@ const removeFavorite = (data) => {
 const checkIfFavorite = (data) => {
     let favoriteList = JSON.parse(localStorage.getItem("favoriteList")) || [];
     let isFavorite = favoriteList.some((favorite) => favorite.id === data.id);
+    console.log('isFavorite:', isFavorite);
     return isFavorite;
 };
 
