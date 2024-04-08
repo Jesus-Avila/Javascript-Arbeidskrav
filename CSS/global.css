@@ -19,6 +19,15 @@ sidebar osv: #525669
 
 body {
   background-color: #010710;
+  animation: fadeIn 3s ease;
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 button {
@@ -132,5 +141,3 @@ footer {
   text-align: center;
   margin: 1.5rem;
 }
-
-
