@@ -16,8 +16,7 @@ async function fetchCosmetic(newCosmeticID) {
             throw new Error('Network response was not ok');
         }
         const data = await response.json();
-        console.log('from fetchcosm', data);
-        console.log('from fetcdsfdshcosm', data.data);
+        console.log('Cosmetic data fetched', data.data);
         return data.data;
     } catch (error) {
         console.error('Error:', error);
@@ -121,21 +120,19 @@ const addFavourite = (data) => {
     localStorage.setItem("favoriteList", JSON.stringify(favoriteList));
   };
 
-  // Funksjon for slette favoritt
-    const removeFavorite = (data) => {
-        let favoriteList = JSON.parse(localStorage.getItem("favoriteList")) || [];
-        favoriteList = favoriteList.filter((favorite) => favorite.id !== data.id);
-        localStorage.setItem("favoriteList", JSON.stringify(favoriteList));
-    };
+// Funksjon for slette favoritt
+const removeFavorite = (data) => {
+    let favoriteList = JSON.parse(localStorage.getItem("favoriteList")) || [];
+    favoriteList = favoriteList.filter((favorite) => favorite.id !== data.id);
+    localStorage.setItem("favoriteList", JSON.stringify(favoriteList));
+};
 
-  // Funksjon for å sjekke om favoritt er lagt til
-    const checkIfFavorite = (data) => {
-        let favoriteList = JSON.parse(localStorage.getItem("favoriteList")) || [];
-        console.log('favoriteList:', favoriteList);
-        let isFavorite = favoriteList.some((favorite) => favorite.id === data.id);
-        console.log('isFavorite:', isFavorite);
-        return isFavorite;
-    };
+// Funksjon for å sjekke om favoritt er lagt til
+const checkIfFavorite = (data) => {
+    let favoriteList = JSON.parse(localStorage.getItem("favoriteList")) || [];
+    let isFavorite = favoriteList.some((favorite) => favorite.id === data.id);
+    return isFavorite;
+};
 
 // Funksjon for å endre tekst på knapp basert på om favoritt er lagt til
 function changeButtonText() {

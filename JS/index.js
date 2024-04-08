@@ -88,15 +88,26 @@ const characterCard = (data, numberOfCharacters) => {
     heartIcon.style.right = "0";
     heartIcon.style.zIndex = "999";
     heartIcon.style.margin = "20px";
+    heartIcon.style.color = checkIfFavorite(character) ? "#9f32ac" : "white";
 
     //Eventlistener og kaller på funksjonen addFavourite
     heartIcon.addEventListener("click", () => {
       if(!checkIfFavorite(character)) {
         addFavourite(character);
+        changeHeartColor(character);
         alert("Added to favourites!");
     } else {
-        alert("This cosmetic is already in your favourites!");
+        removeFavorite(character);
+        changeHeartColor(character);
+        alert("Removed from favourites!");
   }})
+
+    // Funkson for å endre farge på hjerteikonet
+    const changeHeartColor = (data) => {
+      console.log('changeHeartColor:', data);
+      checkIfFavorite(data) ? heartIcon.style.color = "#9f32ac" : heartIcon.style.color = "white";
+    }
+
 
     //Kalle funksjonen navigateToInfoPage ved klikk på karakter kortet
     imageElement.addEventListener("click", () => {
@@ -139,7 +150,6 @@ searchField.addEventListener("keydown", (event) => {
   }
 });
 
-
 // Funksjon for å sjekke om et element er i favoritter
 const checkIfFavorite = (data) => {
   let favoriteList = JSON.parse(localStorage.getItem("favoriteList")) || [];
@@ -147,3 +157,11 @@ const checkIfFavorite = (data) => {
   let isFavorite = favoriteList.some((favorite) => favorite.id === data.id);
   return isFavorite;
 };
+
+// Funksjon for å fjerne et element fra favoritter
+const removeFavorite = (data) => {
+  let favoriteList = JSON.parse(localStorage.getItem("favoriteList")) || [];
+  favoriteList = favoriteList.filter((favorite) => favorite.id !== data.id);
+  localStorage.setItem("favoriteList", JSON.stringify(favoriteList));
+};
+
