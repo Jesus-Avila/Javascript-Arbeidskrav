@@ -56,26 +56,34 @@ export const characterCard = (character) => {
   imageElement.style.height = "400px";
   imageElement.style.objectFit = "cover";
   imageElement.style.zIndex = "1";
+  const currentPage = window.location.href
+  const pageName = currentPage.substring(currentPage.lastIndexOf('/') + 1);
+  let icon = document.createElement("i");
+  if (currentPage.includes( "index.html")){
+  icon.classList.add("fa", "fa-heart", "heartIcon");
+ 
+  
+  }else{
+  icon.classList.add("fa", "fa-solid", "fa-trash");
 
-  const heartIcon = document.createElement("i");
-  heartIcon.classList.add("fa", "fa-heart", "heartIcon");
-  heartIcon.style.fontSize = "36px";
-  heartIcon.style.opacity = "100%";
-  heartIcon.style.position = "absolute";
-  heartIcon.style.top = "0";
-  heartIcon.style.right = "0";
-  heartIcon.style.zIndex = "999";
-  heartIcon.style.margin = "20px";
-  heartIcon.style.color = checkIfFavorite(character) ? "#9f32ac" : "white";
+  }
+  icon.style.fontSize = "36px";
+  icon.style.opacity = "100%";
+  icon.style.position = "absolute";
+  icon.style.top = "0";
+  icon.style.right = "0";
+  icon.style.zIndex = "999";
+  icon.style.margin = "20px";
+  icon.style.color = checkIfFavorite(character) ? "#9f32ac" : "white";
 
-  //Eventlistener og kaller på funksjonen addFavourite
-  heartIcon.addEventListener("click", () => {
+  icon.addEventListener("click", () => {
     if (!checkIfFavorite(character)) {
       addFavourite(character);
       changeHeartColor(character);
       showNotification("Added to favourites!");
     } else {
       removeFavorite(character);
+      showFavorites();
       changeHeartColor(character);
       showNotification("Removed from favourites!");
     }
@@ -85,8 +93,8 @@ export const characterCard = (character) => {
   const changeHeartColor = (data) => {
     console.log("changeHeartColor:", data);
     checkIfFavorite(data)
-      ? (heartIcon.style.color = "#9f32ac")
-      : (heartIcon.style.color = "white");
+      ? (icon.style.color = "#9f32ac")
+      : (icon.style.color = "white");
   };
 
   //Kalle funksjonen navigateToInfoPage ved klikk på karakter kortet
@@ -119,7 +127,7 @@ export const characterCard = (character) => {
 
   characterDiv.appendChild(nameElement);
   characterDiv.appendChild(imageElement);
-  characterDiv.appendChild(heartIcon);
+  characterDiv.appendChild(icon);
   characterDiv.appendChild(notification);
 
   return characterDiv
@@ -151,3 +159,17 @@ const checkIfFavorite = (data) => {
     localStorage.setItem("favoriteList", JSON.stringify(favoriteList));
   };
   
+  export const showFavorites = () => {
+    const favoriteListDiv = document.getElementById("favoriteList");
+    favoriteListDiv.innerHTML = "";
+  
+    const favoriteList = JSON.parse(localStorage.getItem("favoriteList")) || [];
+    if (favoriteList.length === 0) {
+      favoriteListDiv.textContent = "You haven't added any favorites yet.";
+    } else {
+      favoriteList.forEach((character) => {
+        const characterDiv = characterCard(character);
+        favoriteListDiv.appendChild(characterDiv);
+      });
+    }
+  };
