@@ -41,9 +41,10 @@ const characterCards = (data) => {
 
 // Søkefunksjon
 const searchField = document.getElementById("search-field");
-searchField.style.color = "black";
-searchField.style.border = "1px solid #ccc";
-searchField.style.padding = "15px";
+searchField.style.color = "white";
+searchField.style.padding = "5px";
+searchField.style.fontSize = "1.4rem"
+searchField.style.width = "200px"
 
 searchField.addEventListener("keydown", (event) => {
   if (event.key === "Enter") {
