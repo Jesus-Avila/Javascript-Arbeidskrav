@@ -113,7 +113,7 @@ const characterCard = (data, numberOfCharacters) => {
       if (!checkIfFavorite(character)) {
         addFavourite(character);
         changeHeartColor(character);
-        showNotification("Added to favourites");
+        showNotification("Added to favourites!");
       } else {
         removeFavorite(character);
         changeHeartColor(character);
@@ -133,16 +133,27 @@ const characterCard = (data, numberOfCharacters) => {
     });
 
     //Notifikasjon
-    const notification = document.createElement("div");
+    const notification = document.createElement("p");
     notification.classList.add("notification");
+    notification.style.position = "absolute"
+    notification.style.top = "0"
+    notification.style.color ="white"
+    notification.style.fontSize = "1rem"
+    notification.style.backgroundColor ="black"
+    notification.style.display = "none"
+    notification.style.width ="100%"
+    notification.style.height="100%"
 
+  
     const showNotification = (message) => {
       notification.textContent = message;
-      notification.style.display = "block";
+      notification.style.display = "flex";
+      notification.style.justifyContent= "center"
+      notification.style.alignItems = "center"
       notification.style.transition = "0.3s"
       setTimeout(() => {
         notification.style.display = "none";
-      }, 2000); // Skjuler meldingen etter 3 sekunder
+      }, 1000); // Skjuler meldingen etter 1 sekund
     };
 
 
@@ -150,7 +161,7 @@ const characterCard = (data, numberOfCharacters) => {
     characterDiv.appendChild(imageElement);
     characterDiv.appendChild(heartIcon);
     characterListDiv.appendChild(characterDiv);
-    characterListDiv.appendChild(notification)
+    characterDiv.appendChild(notification);
   }
 };
 
