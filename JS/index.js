@@ -138,7 +138,7 @@ const characterCard = (data, numberOfCharacters) => {
     notification.style.position = "absolute"
     notification.style.top = "0"
     notification.style.color ="white"
-    notification.style.fontSize = "1rem"
+    notification.style.fontSize = "1.5em"
     notification.style.backgroundColor ="black"
     notification.style.display = "none"
     notification.style.width ="100%"
