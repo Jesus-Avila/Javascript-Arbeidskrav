@@ -117,7 +117,7 @@ const characterCard = (data, numberOfCharacters) => {
       } else {
         removeFavorite(character);
         changeHeartColor(character);
-        alert("Removed from favourites!");
+      showNotification("Removed from favourites!");
       }
     });
 
@@ -144,6 +144,7 @@ const characterCard = (data, numberOfCharacters) => {
         notification.style.display = "none";
       }, 2000); // Skjuler meldingen etter 3 sekunder
     };
+
 
     characterDiv.appendChild(nameElement);
     characterDiv.appendChild(imageElement);
