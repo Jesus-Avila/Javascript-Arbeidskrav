@@ -1,3 +1,5 @@
+import { characterCard } from "./helpers.js";
+
 // Hent favoritter fra LocalStorage og vis dem på siden
 const showFavorites = () => {
   const favoriteListDiv = document.getElementById("favoriteList");
@@ -8,15 +10,8 @@ const showFavorites = () => {
     favoriteListDiv.textContent = "You haven't added any favorites yet.";
   } else {
     favoriteList.forEach((character) => {
-      const characterDiv = document.createElement("div");
-      characterImg = document.createElement("img");
-      characterImg.src = character.images.icon;
-      characterImg.alt = character.name;
-      characterName = document.createElement("p");
-      characterName.textContent = `${character.name}`
+      const characterDiv = characterCard(character);
       favoriteListDiv.appendChild(characterDiv);
-      favoriteListDiv.appendChild(characterImg);
-      favoriteListDiv.appendChild(characterName)
     });
   }
 };
