@@ -71,14 +71,14 @@ const characterCard = (data, numberOfCharacters) => {
     characterDiv.style.position = "relative";
     characterDiv.style.borderRadius = "10px";
     characterDiv.style.cursor = "pointer";
-    characterDiv.style.filter = "brightness(0.5)"
+    characterDiv.style.filter = "brightness(0.5)";
     characterDiv.addEventListener("mouseenter", () => {
-      characterDiv.style.filter = "brightness(1)"; 
-    })
+      characterDiv.style.filter = "brightness(1)";
+    });
     characterDiv.addEventListener("mouseleave", () => {
       characterDiv.style.filter = "brightness(0.5)";
     });
- 
+
     //Karakter text
     const nameElement = document.createElement("p");
     nameElement.textContent = `${character.name}`;
@@ -95,7 +95,7 @@ const characterCard = (data, numberOfCharacters) => {
     imageElement.style.width = "300px";
     imageElement.style.height = "400px";
     imageElement.style.objectFit = "cover";
-    imageElement.style.zIndex = "1"
+    imageElement.style.zIndex = "1";
 
     const heartIcon = document.createElement("i");
     heartIcon.classList.add("fa", "fa-heart", "heartIcon");
@@ -113,7 +113,7 @@ const characterCard = (data, numberOfCharacters) => {
       if (!checkIfFavorite(character)) {
         addFavourite(character);
         changeHeartColor(character);
-        alert("Added to favourites!");
+        showNotification("Added to favourites");
       } else {
         removeFavorite(character);
         changeHeartColor(character);
@@ -132,14 +132,26 @@ const characterCard = (data, numberOfCharacters) => {
       navigateToInfoPage(character.id);
     });
 
+    //Notifikasjon
+    const notification = document.createElement("div");
+    notification.classList.add("notification");
+
+    const showNotification = (message) => {
+      notification.textContent = message;
+      notification.style.display = "block";
+      notification.style.transition = "0.3s"
+      setTimeout(() => {
+        notification.style.display = "none";
+      }, 2000); // Skjuler meldingen etter 3 sekunder
+    };
+
     characterDiv.appendChild(nameElement);
     characterDiv.appendChild(imageElement);
     characterDiv.appendChild(heartIcon);
     characterListDiv.appendChild(characterDiv);
+    characterListDiv.appendChild(notification)
   }
 };
-
-
 
 //Sender valgte element til localstorage, må hentes ned igjen i favourites.js
 const addFavourite = (character) => {
