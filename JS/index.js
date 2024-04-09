@@ -10,10 +10,20 @@ const fetchData = () => {
     })
     .then((responseData) => {
       characterData = responseData.data.items;
-      characterCard(characterData, 50);
+      shuffleArray(characterData)
+      characterCard(characterData);
     })
     .catch((error) => console.error("Error fetching data:", error));
 };
+
+// random skins fra array
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+}
 
 fetchData();
 
@@ -32,13 +42,13 @@ const removeFavorite = (data) => {
   localStorage.setItem("favoriteList", JSON.stringify(favoriteList));
 };
 
-const characterCard = (data, numberOfCharacters) => {
+const characterCard = (data) => {
   const characterListDiv = document.getElementById("characterContainer");
   characterListDiv.innerHTML = "";
 
-  for (let i = 0; i < numberOfCharacters; i++) {
-    const randomIndex = Math.floor(Math.random() * data.length);
-    const character = data[randomIndex];
+
+  for (let i = 0; i < data.length; i++) {
+    const character = data[i];
     const image = character.images.icon;
 
     // bestemmer farge basert på rarity
