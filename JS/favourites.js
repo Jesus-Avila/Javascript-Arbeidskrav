@@ -26,3 +26,5 @@ const clearFavorites = () => {
 //knapp som kaller på funksjonen
 const clearBtn = document.getElementById("clearBtn");
 clearBtn.addEventListener("click", clearFavorites);
+
+
