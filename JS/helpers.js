@@ -130,7 +130,7 @@ export const characterCard = (character) => {
 
 //funksjon som sender favoritt til localstorage og poster til crudcrud når man trykker på hjertet
 const urlPost = "https://crudcrud.com/api/2f342e16b33a4addbdea72e80bf1ffb0/resource";
-const addFavouriteCrud = async (character) => {
+export const addFavouriteCrud = async (character) => {
   let favoriteList = JSON.parse(localStorage.getItem("favorittList")) || [];
   favoriteList.push(character);
   localStorage.setItem("favoriteList", JSON.stringify(favoriteList));
