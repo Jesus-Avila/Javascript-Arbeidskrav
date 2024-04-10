@@ -72,6 +72,12 @@ export const characterCard = (character) => {
   icon.style.zIndex = "999";
   icon.style.margin = "20px";
   icon.style.color = checkIfFavorite(character) ? "#9f32ac" : "white";
+  // icon.addEventListener("mouseenter", () => {
+    // icon.style.filter = "brightness(1)";
+  // });
+  // icon.addEventListener("mouseleave", () => {
+    // icon.style.filter = "brightness(0.5)";
+  // });
 
   icon.addEventListener("click", () => {
     if (!checkIfFavorite(character)) {
