@@ -69,9 +69,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Tilbake pil på info-siden
 const backToHomeArrow = document.querySelector("#chevronTextContainer");
-backToHomeArrow.addEventListener("click", () => {
-    window.location.href = "index.html";
-});
+    backToHomeArrow.addEventListener("click", () => {
+        if (history.length > 1) {
+            window.history.back();
+        } else
+        window.location.href = "index.html";
+    });
+
+    // Tilbake til index.html eller favourites.html ved bruk av tilbakeknapp i nettleser eller på siden
+window.addEventListener("popstate", () => {
+    if (window.history.state && window.history.state.page) {
+        window.location.href = 'favourites.html';
+    } else if (window.history.state && window.history.state.page === 'index') {
+        window.location.href = 'index.html';
+    } else {
+        window.location.href = 'index.html';
+    }
+})
 
 // Endre bakgrunnsfarge basert på rarity
 const changeCardColor = (data) => {

@@ -141,6 +141,7 @@ const addFavourite = (character) => {
 
   //Navigerer til info.html med id til valgt karakter
 const navigateToInfoPage = (id) => {
+    // history.pushState({ page: 'favourites' }, '', "favourites.html")
     window.location.href = `info.html?cosmeticID=${encodeURIComponent(id)}`;
   };
 
