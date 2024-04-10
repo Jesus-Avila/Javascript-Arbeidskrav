@@ -1,21 +1,21 @@
 import { characterCard } from "./helpers.js";
 let characterData; // Definerer en global variabel for å lagre karakterdata
 
-const fetchData = () => {
-  fetch("https://fortnite-api.com/v2/cosmetics/br/new")
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-      return response.json();
-    })
-    .then((responseData) => {
-      characterData = responseData.data.items;
-      shuffleArray(characterData)
-      characterCards(characterData);
-    })
-    .catch((error) => console.error("Error fetching data:", error));
+const fetchData = async () => {
+  try {
+    const response = await fetch("https://fortnite-api.com/v2/cosmetics/br/new");
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const responseData = await response.json();
+    const characterData = responseData.data.items;
+    shuffleArray(characterData);
+    characterCards(characterData);
+  } catch (error) {
+    console.error("Error fetching data:", error);
+  }
 };
+
 
 // random skins fra array
 function shuffleArray(array) {
