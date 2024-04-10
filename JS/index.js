@@ -46,10 +46,9 @@ searchField.style.padding = "5px";
 searchField.style.fontSize = "1.4rem"
 searchField.style.width = "200px"
 
-searchField.addEventListener("keydown", (event) => {
-  if (event.key === "Enter") {
-    const searchInput = searchField.value.toLowerCase();
-    const filteredCharacters = characterData.filter((character) => character.name.toLowerCase().includes(searchInput));
-    characterCards(filteredCharacters, filteredCharacters.length);
-  }
+searchField.addEventListener("input", () => {
+  const searchInput = searchField.value.toLowerCase();
+  const filteredCharacters = characterData.filter((character) => character.name.toLowerCase().includes(searchInput));
+  characterCards(filteredCharacters, filteredCharacters.length);
+
 });
