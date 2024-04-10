@@ -1,27 +1,37 @@
-const url = "https://crudapi.co.uk/api/v1/probe";
-const token = "WACSi_XkRx3SKxyb9MJN88P9ALPwqzRD4zwzeI-M7z9_xmgS8Q";
+const url = "https://crudcrud.com/api/2f342e16b33a4addbdea72e80bf1ffb0/resource";
 
-const options = {
-  method: `GET`,
-  headers: {
-    Authorization: `Bearer ${token}`,
-  },
-};
+const fetchData = async () => {
+  try {
+    const input = document.getElementById("review");
+    const inputText = input.value;
+    const inputField = document.getElementById("reviewField")
+    const inputFieldValue = inputField.value
 
-const fetchData = async() => {
-await fetch(url, options)
-  .then((response) => {
+    const postData = {
+      input: inputText,
+      inputField: inputFieldValue,
+    };
+
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(postData)
+    });
+
     if (!response.ok) {
       throw new Error("Network response was not ok");
     }
-    return response.json(); // eller response.text() avhengig av responsen
-  })
-  .then((data) => {
-    console.log("Response data:", data);
-  })
-  .catch((error) => {
-    console.error("There was a problem with the fetch operation:", error);
-  });
-}
 
-fetchData()
+    const responseData = await response.json();
+    console.log("Response data:", responseData);
+  } catch (error) {
+    console.error("There was a problem with the fetch operation:", error);
+  }
+};
+
+// Kall fetchData-funksjonen for å sende POST-requesten
+document.getElementById("submitBtn").addEventListener("click", () =>{
+    fetchData();
+})
