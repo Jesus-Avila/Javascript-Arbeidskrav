@@ -75,7 +75,7 @@ export const characterCard = (character) => {
 
   icon.addEventListener("click", () => {
     if (!checkIfFavorite(character)) {
-      addFavouriteCrud(character)
+      addFavouriteCrud(character);
       changeHeartColor(character);
       showNotification("Added to favourites!");
     } else {
@@ -128,6 +128,7 @@ export const characterCard = (character) => {
   return characterDiv;
 };
 
+//funksjon som sender favoritt til localstorage og poster til crudcrud når man trykker på hjertet
 const urlPost = "https://crudcrud.com/api/2f342e16b33a4addbdea72e80bf1ffb0/resource";
 const addFavouriteCrud = async (character) => {
   let favoriteList = JSON.parse(localStorage.getItem("favorittList")) || [];
@@ -141,7 +142,6 @@ const addFavouriteCrud = async (character) => {
       },
       body: JSON.stringify(character),
     });
-
     if (!response.ok) {
       throw new Error("Network response was not ok");
     }
@@ -152,17 +152,11 @@ const addFavouriteCrud = async (character) => {
     console.error("There was a problem with the fetch operation:", error);
   }
 };
-/*
-const addFavourite = (character) => {
-    let favoriteList = JSON.parse(localStorage.getItem("favoriteList")) || [];
-    favoriteList.push(character);
-    localStorage.setItem("favoriteList", JSON.stringify(favoriteList));
-  };*/
 
 //Navigerer til info.html med id til valgt karakter
 const navigateToInfoPage = (id) => {
-    window.location.href = `info.html?cosmeticID=${encodeURIComponent(id)}`;
-  };
+  window.location.href = `info.html?cosmeticID=${encodeURIComponent(id)}`;
+};
 
 // Funksjon for å sjekke om et element er i favoritter
 const checkIfFavorite = (data) => {
