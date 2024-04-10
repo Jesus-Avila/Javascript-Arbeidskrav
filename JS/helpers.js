@@ -56,16 +56,13 @@ export const characterCard = (character) => {
   imageElement.style.height = "400px";
   imageElement.style.objectFit = "cover";
   imageElement.style.zIndex = "1";
-  const currentPage = window.location.href
-  const pageName = currentPage.substring(currentPage.lastIndexOf('/') + 1);
+  const currentPage = window.location.href;
+  const pageName = currentPage.substring(currentPage.lastIndexOf("/") + 1);
   let icon = document.createElement("i");
-  if (currentPage.includes( "index.html")){
-  icon.classList.add("fa", "fa-heart", "heartIcon");
- 
-  
-  }else{
-  icon.classList.add("fa", "fa-solid", "fa-trash");
-
+  if (currentPage.includes("index.html")) {
+    icon.classList.add("fa", "fa-heart", "heartIcon");
+  } else {
+    icon.classList.add("fa", "fa-solid", "fa-trash");
   }
   icon.style.fontSize = "36px";
   icon.style.opacity = "100%";
@@ -78,7 +75,7 @@ export const characterCard = (character) => {
 
   icon.addEventListener("click", () => {
     if (!checkIfFavorite(character)) {
-      addFavourite(character);
+      addFavouriteCrud(character)
       changeHeartColor(character);
       showNotification("Added to favourites!");
     } else {
@@ -92,9 +89,7 @@ export const characterCard = (character) => {
   // Funkson for å endre farge på hjerteikonet
   const changeHeartColor = (data) => {
     console.log("changeHeartColor:", data);
-    checkIfFavorite(data)
-      ? (icon.style.color = "#9f32ac")
-      : (icon.style.color = "white");
+    checkIfFavorite(data) ? (icon.style.color = "#9f32ac") : (icon.style.color = "white");
   };
 
   //Kalle funksjonen navigateToInfoPage ved klikk på karakter kortet
@@ -130,47 +125,71 @@ export const characterCard = (character) => {
   characterDiv.appendChild(icon);
   characterDiv.appendChild(notification);
 
-  return characterDiv
+  return characterDiv;
 };
 
+const urlPost = "https://crudcrud.com/api/2f342e16b33a4addbdea72e80bf1ffb0/resource";
+const addFavouriteCrud = async (character) => {
+  let favoriteList = JSON.parse(localStorage.getItem("favorittList")) || [];
+  favoriteList.push(character);
+  localStorage.setItem("favoriteList", JSON.stringify(favoriteList));
+  try {
+    const response = await fetch(urlPost, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(character),
+    });
+
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+
+    const responseData = await response.json();
+    console.log("Added to CRUD API", responseData);
+  } catch (error) {
+    console.error("There was a problem with the fetch operation:", error);
+  }
+};
+/*
 const addFavourite = (character) => {
     let favoriteList = JSON.parse(localStorage.getItem("favoriteList")) || [];
     favoriteList.push(character);
     localStorage.setItem("favoriteList", JSON.stringify(favoriteList));
-  };
+  };*/
 
-  //Navigerer til info.html med id til valgt karakter
+//Navigerer til info.html med id til valgt karakter
 const navigateToInfoPage = (id) => {
-    // history.pushState({ page: 'favourites' }, '', "favourites.html")
     window.location.href = `info.html?cosmeticID=${encodeURIComponent(id)}`;
   };
 
-  // Funksjon for å sjekke om et element er i favoritter
+// Funksjon for å sjekke om et element er i favoritter
 const checkIfFavorite = (data) => {
-    let favoriteList = JSON.parse(localStorage.getItem("favoriteList")) || [];
-    console.log("favoriteList:", favoriteList);
-    let isFavorite = favoriteList.some((favorite) => favorite.id === data.id);
-    return isFavorite;
-  };
-  
-  // Funksjon for å fjerne et element fra favoritter
-  const removeFavorite = (data) => {
-    let favoriteList = JSON.parse(localStorage.getItem("favoriteList")) || [];
-    favoriteList = favoriteList.filter((favorite) => favorite.id !== data.id);
-    localStorage.setItem("favoriteList", JSON.stringify(favoriteList));
-  };
-  
-  export const showFavorites = () => {
-    const favoriteListDiv = document.getElementById("favoriteList");
-    favoriteListDiv.innerHTML = "";
-  
-    const favoriteList = JSON.parse(localStorage.getItem("favoriteList")) || [];
-    if (favoriteList.length === 0) {
-      favoriteListDiv.textContent = "You haven't added any favorites yet.";
-    } else {
-      favoriteList.forEach((character) => {
-        const characterDiv = characterCard(character);
-        favoriteListDiv.appendChild(characterDiv);
-      });
-    }
-  };
+  let favoriteList = JSON.parse(localStorage.getItem("favoriteList")) || [];
+  console.log("favoriteList:", favoriteList);
+  let isFavorite = favoriteList.some((favorite) => favorite.id === data.id);
+  return isFavorite;
+};
+
+// Funksjon for å fjerne et element fra favoritter
+const removeFavorite = (data) => {
+  let favoriteList = JSON.parse(localStorage.getItem("favoriteList")) || [];
+  favoriteList = favoriteList.filter((favorite) => favorite.id !== data.id);
+  localStorage.setItem("favoriteList", JSON.stringify(favoriteList));
+};
+
+export const showFavorites = () => {
+  const favoriteListDiv = document.getElementById("favoriteList");
+  favoriteListDiv.innerHTML = "";
+
+  const favoriteList = JSON.parse(localStorage.getItem("favoriteList")) || [];
+  if (favoriteList.length === 0) {
+    favoriteListDiv.textContent = "You haven't added any favorites yet.";
+  } else {
+    favoriteList.forEach((character) => {
+      const characterDiv = characterCard(character);
+      favoriteListDiv.appendChild(characterDiv);
+    });
+  }
+};
