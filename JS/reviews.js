@@ -1,5 +1,5 @@
+//Funksjon som poster/sender data fra input-field review og reviewField til crudcrud API
 const urlPost = "https://crudcrud.com/api/2f342e16b33a4addbdea72e80bf1ffb0/resource";
-
 const fetchDataPost = async () => {
   try {
     const input = document.getElementById("review");
@@ -31,6 +31,7 @@ const fetchDataPost = async () => {
   }
 };
 
+//Funksjon som endrer på dataen 
 const urlPut = "https://crudcrud.com/api/2f342e16b33a4addbdea72e80bf1ffb0/resource/<id>"; // Update the URL with the resource ID
 
 const fetchDataPut = async () => {
@@ -45,12 +46,13 @@ const fetchDataPut = async () => {
       inputField: inputFieldValue,
     };
 
-    const response = await fetch(`${urlPut}/${resourceId}`, { // Update the URL to include the resource ID
-      method: "PUT", // Change the method to PUT
+    const response = await fetch(`${urlPut}/${resourceId}`, {
+      // Update the URL to include the resource ID
+      method: "PUT", 
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(putData)
+      body: JSON.stringify(putData),
     });
 
     if (!response.ok) {
@@ -64,18 +66,18 @@ const fetchDataPut = async () => {
   }
 };
 
-document.getElementById("editBtn").addEventListener("click", () => {
+/*document.getElementById("editBtn").addEventListener("click", () => {
   fetchDataPut();
-})
+});*/
 
-
-// Kall fetchData-funksjonen for å sende POST-requesten
+// Kall fetchDataPost-funksjonen for å sende POST-requesten og createList. PreventDefault for at siden ikke skal refreshe. 
 document.getElementById("submitBtn").addEventListener("click", () => {
   event.preventDefault();
-  fetchData();
+  fetchDataPost();
   createList();
 });
 
+//Lager inputfeltene på favorittisden og eventlistener for knappen som hener input.value. Kaller på funksjonen fetchDataPost
 const createList = () => {
   const list = document.getElementById("list");
   const listItem = document.createElement("li");
@@ -87,6 +89,3 @@ const createList = () => {
   list.appendChild(listItem);
   listItem.appendChild(listText);
 };
-document.getElementById("submitBtn").addEventListener("click", () =>{
-    fetchDataPost();
-})
