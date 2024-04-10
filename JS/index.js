@@ -8,7 +8,7 @@ const fetchData = async () => {
       throw new Error("Network response was not ok");
     }
     const responseData = await response.json();
-    const characterData = responseData.data.items;
+    characterData = responseData.data.items;
     shuffleArray(characterData);
     characterCards(characterData);
   } catch (error) {
@@ -46,9 +46,9 @@ searchField.style.padding = "5px";
 searchField.style.fontSize = "1.4rem"
 searchField.style.width = "200px"
 
-searchField.addEventListener("input", () => {
-  const searchInput = searchField.value.toLowerCase();
+searchField.addEventListener("input", (event) => {
+  const searchInput = event.target.value.toLowerCase();
   const filteredCharacters = characterData.filter((character) => character.name.toLowerCase().includes(searchInput));
   characterCards(filteredCharacters, filteredCharacters.length);
-
+console.log(searchInput)
 });
