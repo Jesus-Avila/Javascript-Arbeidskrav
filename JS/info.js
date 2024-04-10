@@ -47,15 +47,16 @@ function displayCosmetic(data) {
 }
 
 // Fetcher data og kaller på displayCosmetic
-async function fetchAndDisplayCosmetic(newCosmeticID) {
+const fetchAndDisplayCosmetic = async (newCosmeticID) => {
     try {
-        data = await fetchCosmetic(newCosmeticID);
+        const data = await fetchCosmetic(newCosmeticID);
         displayCosmetic(data);
         changeButtonText();
     } catch (error) {
         console.error('Error:', error);
     }
-}
+};
+
 
 // Henter ut URL parameteren(ID'en til cosmetic) og kaller på fetchAndDisplayCosmetic
 document.addEventListener('DOMContentLoaded', () => {
@@ -73,7 +74,7 @@ backToHomeArrow.addEventListener("click", () => {
 });
 
 // Endre bakgrunnsfarge basert på rarity
-function changeCardColor (data) {
+const changeCardColor = (data) => {
     switch (data.rarity.value.toLowerCase()) {
       case "uncommon":
         cosmeticInfoCard.style.backgroundColor = "rgba(0, 128, 0, 0.5)";
@@ -93,7 +94,8 @@ function changeCardColor (data) {
       default:
         cosmeticInfoCard.style.backgroundColor = "rgba(64, 224, 208, 0.5)"; // Default color
     }
-}
+};
+
 
 // Eventlistener og kaller på funksjonen addFavourite
 const addFavouriteButton = document.querySelector('#addToFavoritesBtn');
@@ -131,6 +133,6 @@ const checkIfFavorite = (data) => {
 };
 
 // Funksjon for å endre tekst på knapp basert på om favoritt er lagt til
-function changeButtonText() {
+const changeButtonText = () => {
     checkIfFavorite(data) ? addFavouriteButton.innerHTML = "Remove from favourites" : addFavouriteButton.innerHTML = "Add to favourites";
-}
+};
