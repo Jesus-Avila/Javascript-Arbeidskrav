@@ -20,7 +20,7 @@ const addSuggestion = (text) => {
   list.appendChild(listItem);
 };
 
-const searchField = document.getElementById("searchField"); 
+const searchField = document.getElementById("review"); 
 searchField.addEventListener("keydown", (event) => {
   if (event.key === "Enter") {
     const inputText = searchField.value; 
