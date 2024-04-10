@@ -79,14 +79,16 @@ export const characterCard = (character) => {
     icon.style.filter = "brightness(0.5)";
   });
 
-  icon.addEventListener("click", () => {
+  icon.addEventListener("click", async () => {
+    
     if (!checkIfFavorite(character)) {
-      addFavouriteCrud(character);
+      await addFavouriteCrud(character);
       changeHeartColor(character);
       showNotification("Added to favourites!");
     } else {
-      removeFavorite(character);
-      showFavorites();
+      await deleteFavouriteCrud(character._id)
+      //removeFavorite(character);
+      await showFavorites();
       changeHeartColor(character);
       showNotification("Removed from favourites!");
     }
@@ -159,6 +161,22 @@ export const addFavouriteCrud = async (character) => {
   }
 };
 
+
+const urlDelete = "https://crudcrud.com/api/2f342e16b33a4addbdea72e80bf1ffb0/resource";
+export const deleteFavouriteCrud = async (characterId) => {
+  try {
+    const response = await fetch (`${urlDelete}/${characterId}`, {
+      method: "DELETE",
+    });
+
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+  } catch (error) {
+    console.error("There was a problem with the fetch operation:", error)
+  }
+};
+
 //Navigerer til info.html med id til valgt karakter
 const navigateToInfoPage = (id) => {
   window.location.href = `info.html?cosmeticID=${encodeURIComponent(id)}`;
@@ -166,30 +184,27 @@ const navigateToInfoPage = (id) => {
 
 // Funksjon for å sjekke om et element er i favoritter
 const checkIfFavorite = (data) => {
-  let favoriteList = JSON.parse(localStorage.getItem("favoriteList")) || [];
-  console.log("favoriteList:", favoriteList);
-  let isFavorite = favoriteList.some((favorite) => favorite.id === data.id);
-  return isFavorite;
+  return data._id;
 };
 
-// Funksjon for å fjerne et element fra favoritter
-const removeFavorite = (data) => {
-  let favoriteList = JSON.parse(localStorage.getItem("favoriteList")) || [];
-  favoriteList = favoriteList.filter((favorite) => favorite.id !== data.id);
-  localStorage.setItem("favoriteList", JSON.stringify(favoriteList));
-};
-
-export const showFavorites = () => {
+export const showFavorites = async () => {
   const favoriteListDiv = document.getElementById("favoriteList");
-  favoriteListDiv.innerHTML = "";
+  const response = await fetch (`${urlDelete}`, {
+  });
 
-  const favoriteList = JSON.parse(localStorage.getItem("favoriteList")) || [];
+  if (!response.ok) {
+    throw new Error("Network response was not ok");
+  }
+  const favoriteList = await response.json();
+  
   if (favoriteList.length === 0) {
     favoriteListDiv.textContent = "You haven't added any favorites yet.";
   } else {
+    favoriteListDiv.innerHTML = "";
     favoriteList.forEach((character) => {
       const characterDiv = characterCard(character);
       favoriteListDiv.appendChild(characterDiv);
     });
   }
+  return favoriteList
 };

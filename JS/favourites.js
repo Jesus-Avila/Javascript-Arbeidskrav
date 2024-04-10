@@ -1,10 +1,14 @@
+import { deleteFavouriteCrud } from "./helpers.js";
 import {showFavorites } from "./helpers.js";
-showFavorites();
+let favoriteList = await showFavorites();
 
 //funksjon som tømmer listen
-const clearFavorites = () => {
-  localStorage.removeItem("favoriteList");
-  showFavorites();
+const clearFavorites = async () => {
+  const promises = favoriteList.map(async (character) => {
+    await deleteFavouriteCrud(character._id)
+  });
+  await Promise.all(promises)
+  favoriteList = await showFavorites();
 };
 
 //knapp som kaller på funksjonen
