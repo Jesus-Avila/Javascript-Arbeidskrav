@@ -9,7 +9,7 @@ const cosmeticRarity = document.querySelector('#cosmeticRarity');
 const cosmeticInfoCard = document.querySelector('#cosmeticInfoCard');
 
 // Fetcher data fra API
-async function fetchCosmetic(newCosmeticID) {
+const fetchCosmetic = async (newCosmeticID) => {
     try {
         const response = await fetch(baseURL + newCosmeticID);
         if (!response.ok) {
@@ -21,7 +21,8 @@ async function fetchCosmetic(newCosmeticID) {
     } catch (error) {
         console.error('Error:', error);
     }    
-}
+};
+
 
 // Display av data
 function displayCosmetic(data) {
