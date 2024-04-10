@@ -4,8 +4,8 @@ const fetchData = async () => {
   try {
     const input = document.getElementById("review");
     const inputText = input.value;
-    const inputField = document.getElementById("reviewField")
-    const inputFieldValue = inputField.value
+    const inputField = document.getElementById("reviewField");
+    const inputFieldValue = inputField.value;
 
     const postData = {
       input: inputText,
@@ -15,9 +15,9 @@ const fetchData = async () => {
     const response = await fetch(url, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(postData)
+      body: JSON.stringify(postData),
     });
 
     if (!response.ok) {
@@ -32,6 +32,20 @@ const fetchData = async () => {
 };
 
 // Kall fetchData-funksjonen for å sende POST-requesten
-document.getElementById("submitBtn").addEventListener("click", () =>{
-    fetchData();
-})
+document.getElementById("submitBtn").addEventListener("click", () => {
+  event.preventDefault();
+  fetchData();
+  createList();
+});
+
+const createList = () => {
+  const list = document.getElementById("list");
+  const listItem = document.createElement("li");
+  const listText = document.createElement("p");
+  const input = document.getElementById("review");
+  const inputField = document.getElementById("reviewField");
+  listItem.innerHTML = input.value;
+  listText.innerHTML = `${inputField.value} <button>Edit</button><button>Delete</>`;
+  list.appendChild(listItem);
+  listItem.appendChild(listText);
+};
