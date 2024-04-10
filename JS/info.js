@@ -1,4 +1,4 @@
-
+import { addFavouriteCrud } from "./helpers.js";
 const baseURL = 'https://fortnite-api.com/v2/cosmetics/br/';
 let data;
 
@@ -49,7 +49,7 @@ function displayCosmetic(data) {
 // Fetcher data og kaller på displayCosmetic
 const fetchAndDisplayCosmetic = async (newCosmeticID) => {
     try {
-        const data = await fetchCosmetic(newCosmeticID);
+        data = await fetchCosmetic(newCosmeticID);
         displayCosmetic(data);
         changeButtonText();
     } catch (error) {
@@ -115,7 +115,7 @@ const changeCardColor = (data) => {
 const addFavouriteButton = document.querySelector('#addToFavoritesBtn');
 addFavouriteButton.addEventListener('click', () => {
     if(!checkIfFavorite(data)) {
-        addFavourite(data);
+        addFavouriteCrud(data)
         changeButtonText();
         alert("Added to favourites!");
     } else {
@@ -124,26 +124,15 @@ addFavouriteButton.addEventListener('click', () => {
         alert("Removed from favourites!");
 }})
 
-// Funksjon for å legge til favoritt
-const addFavourite = (data) => {
-    let favoriteList = JSON.parse(localStorage.getItem("favoriteList")) || [];
-    favoriteList.push(data);
-    localStorage.setItem("favoriteList", JSON.stringify(favoriteList));
-  };
-
 // Funksjon for slette favoritt
 const removeFavorite = (data) => {
-    let favoriteList = JSON.parse(localStorage.getItem("favoriteList")) || [];
-    favoriteList = favoriteList.filter((favorite) => favorite.id !== data.id);
-    localStorage.setItem("favoriteList", JSON.stringify(favoriteList));
+ //kommer snart en kode
 };
 
 // Funksjon for å sjekke om favoritt er lagt til
 const checkIfFavorite = (data) => {
-    let favoriteList = JSON.parse(localStorage.getItem("favoriteList")) || [];
-    let isFavorite = favoriteList.some((favorite) => favorite.id === data.id);
-    console.log('isFavorite:', isFavorite);
-    return isFavorite;
+    //kommer snart en kode
+    return false;
 };
 
 // Funksjon for å endre tekst på knapp basert på om favoritt er lagt til
