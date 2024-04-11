@@ -137,7 +137,7 @@ addFavouriteButton.addEventListener('click', async () => {
 })
 
 // hente data fra crud crud
-const urlCrud = "https://crudcrud.com/api/2f342e16b33a4addbdea72e80bf1ffb0/resource";
+const urlCrud = "https://crudcrud.com/api/3de91dcfb89a4d588274b226a6e52ac9/resource";
 const getFavoritesList = async () => { 
     const response = await fetch (urlCrud);
     
