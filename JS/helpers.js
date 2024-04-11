@@ -1,9 +1,32 @@
+export const addCommentsCrud = async (character) => {
+  try {
+    const body = {...character}
+    delete body._id
+    const response = await fetch(`${url}/${character._id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    });
+ 
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+ 
+    const responseData = await response.json();
+    console.log("Updated on CRUD API", responseData);
+  } catch (error) {
+    console.error("There was a problem with the fetch operation:", error);
+  }
+};
+ 
 export const characterCard = (character) => {
   const image = character.images.icon;
-
+ 
   // bestemmer farge basert på rarity
   let backgroundColor;
-
+ 
   switch (character.rarity.value.toLowerCase()) {
     case "uncommon":
       backgroundColor = "rgba(0, 128, 0, 0.5)";
@@ -23,7 +46,7 @@ export const characterCard = (character) => {
     default:
       backgroundColor = "rgba(64, 224, 208, 0.5)";
   }
-
+ 
   //Karakter div
   const characterDiv = document.createElement("div");
   characterDiv.classList.add("character");
@@ -38,16 +61,16 @@ export const characterCard = (character) => {
   characterDiv.addEventListener("mouseleave", () => {
     characterDiv.style.filter = "brightness(0.5)";
   });
-
+ 
   //Karakter text
   const nameElement = document.createElement("p");
   nameElement.textContent = `${character.name}`;
   nameElement.style.fontSize = "36px";
   nameElement.style.position = "absolute";
   nameElement.style.bottom = "0";
-  nameElement.style.margin = "20px";
+  nameElement.style.margin = "60px 10px";
   nameElement.style.zIndex = "1";
-
+ 
   //Karakterbilde
   const imageElement = document.createElement("img");
   imageElement.src = image;
@@ -78,9 +101,9 @@ export const characterCard = (character) => {
   icon.addEventListener("mouseleave", () => {
     icon.style.filter = "brightness(0.5)";
   });
-
+ 
   icon.addEventListener("click", async () => {
-    
+   
     if (!checkIfFavorite(character)) {
       await addFavouriteCrud(character);
       changeHeartColor(character);
@@ -93,18 +116,18 @@ export const characterCard = (character) => {
       showNotification("Removed from favourites!");
     }
   });
-
+ 
   // Funkson for å endre farge på hjerteikonet
   const changeHeartColor = (data) => {
     console.log("changeHeartColor:", data);
     checkIfFavorite(data) ? (icon.style.color = "#9f32ac") : (icon.style.color = "white");
   };
-
+ 
   //Kalle funksjonen navigateToInfoPage ved klikk på karakter kortet
   imageElement.addEventListener("click", () => {
     navigateToInfoPage(character.id);
   });
-
+ 
   //Notifikasjon
   const notification = document.createElement("p");
   notification.classList.add("notification");
@@ -116,7 +139,7 @@ export const characterCard = (character) => {
   notification.style.display = "none";
   notification.style.width = "100%";
   notification.style.height = "100%";
-
+ 
   const showNotification = (message) => {
     notification.textContent = message;
     notification.style.display = "flex";
@@ -127,23 +150,81 @@ export const characterCard = (character) => {
       notification.style.display = "none";
     }, 1000); // Skjuler meldingen etter 1 sekund
   };
-
+ 
   characterDiv.appendChild(nameElement);
   characterDiv.appendChild(imageElement);
   characterDiv.appendChild(icon);
   characterDiv.appendChild(notification);
-
+ 
+  if (character._id) {
+    //inputbtn og updatefunksjon og deletefunksjon
+    const add = document.createElement("textarea");
+    add.style.backgroundColor = "transparent";
+    add.style.border = "none"
+    add.style.outline = "none"
+    add.style.resize = "none"
+    add.placeholder = "Add a comment"
+ 
+    const commentDiv = document.createElement("div")
+    commentDiv.style.cssText = `
+      margin: 0 10px;
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+    `
+    if (character.comments){
+      add.value = character.comments;
+    }
+   
+    const editButton = document.createElement("button");
+    editButton.innerText = "Edit";
+    editButton.style.cssText = `
+      background-color: #808080; /* Grå farge */
+      color: white; /* Hvit tekst */
+      border: 1px solid #707070; /* Grått border */
+      border-radius: 20px; /* Gjør knappene runde */
+      padding: 5px 10px; /* Små knapper */
+      font-size: 12px; /* Mindre tekst */
+      cursor: pointer; /* Endre musepeker */
+      margin: 5px; /* Liten avstand mellom knappene */
+    `;
+    editButton.addEventListener("click", () => addCommentsCrud({...character, comments: add.value}));
+ 
+    const clearButton = document.createElement("button");
+    clearButton.innerText = "Clear";
+    clearButton.style.cssText = `
+    background-color: #808080; /* Grå farge */
+    color: white; /* Hvit tekst */
+    border: 1px solid #707070; /* Grått border */
+    border-radius: 20px; /* Gjør knappene runde */
+    padding: 5px 10px; /* Små knapper */
+    font-size: 12px; /* Mindre tekst */
+    cursor: pointer; /* Endre musepeker */
+    margin: 5px; /* Liten avstand mellom knappene */
+  `;
+    clearButton.addEventListener("click", async () => {
+      await addCommentsCrud({...character, comments: ""})
+      add.value = "";
+   
+  });
+   
+    characterDiv.appendChild(commentDiv)
+    commentDiv.appendChild(add);
+    commentDiv.appendChild(editButton)
+    commentDiv.appendChild(clearButton)
+  }
+ 
   return characterDiv;
 };
-
+ 
 //funksjon som sender favoritt til localstorage og poster til crudcrud når man trykker på hjertet
-const urlPost = "https://crudcrud.com/api/2f342e16b33a4addbdea72e80bf1ffb0/resource";
+const url = "https://crudcrud.com/api/3de91dcfb89a4d588274b226a6e52ac9/resource";
 export const addFavouriteCrud = async (character) => {
   let favoriteList = JSON.parse(localStorage.getItem("favorittList")) || [];
   favoriteList.push(character);
   localStorage.setItem("favorittList", JSON.stringify(favoriteList));
   try {
-    const response = await fetch(urlPost, {
+    const response = await fetch(url, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -153,22 +234,21 @@ export const addFavouriteCrud = async (character) => {
     if (!response.ok) {
       throw new Error("Network response was not ok");
     }
-
+ 
     const responseData = await response.json();
     console.log("Added to CRUD API", responseData);
   } catch (error) {
     console.error("There was a problem with the fetch operation:", error);
   }
 };
-
-//Funksjon som sletter 
-const urlDelete = "https://crudcrud.com/api/2f342e16b33a4addbdea72e80bf1ffb0/resource";
+ 
+//Funksjon som sletter
 export const deleteFavouriteCrud = async (characterId) => {
   try {
-    const response = await fetch (`${urlDelete}/${characterId}`, {
+    const response = await fetch (`${url}/${characterId}`, {
       method: "DELETE",
     });
-
+ 
     if (!response.ok) {
       throw new Error("Network response was not ok");
     }
@@ -176,27 +256,27 @@ export const deleteFavouriteCrud = async (characterId) => {
     console.error("There was a problem with the fetch operation:", error)
   }
 };
-
+ 
 //Navigerer til info.html med id til valgt karakter
 const navigateToInfoPage = (id) => {
   window.location.href = `info.html?cosmeticID=${encodeURIComponent(id)}`;
 };
-
+ 
 // Funksjon for å sjekke om et element er i favoritter
-const checkIfFavorite = (data) => {
+const checkIfFavorite = (data) => {//må sjekkes opp
   return data._id;
 };
-
+ 
 export const showFavorites = async () => {
   const favoriteListDiv = document.getElementById("favoriteList");
-  const response = await fetch (`${urlDelete}`, {
+  const response = await fetch (`${url}`, {
   });
-
+ 
   if (!response.ok) {
     throw new Error("Network response was not ok");
   }
   const favoriteList = await response.json();
-  
+ 
   if (favoriteList.length === 0) {
     favoriteListDiv.textContent = "You haven't added any favorites yet.";
   } else {
