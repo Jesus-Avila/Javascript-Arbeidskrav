@@ -156,64 +156,75 @@ export const characterCard = (character) => {
   characterDiv.appendChild(icon);
   characterDiv.appendChild(notification);
  
-  if (character._id) {
-    //inputbtn og updatefunksjon og deletefunksjon
-    const add = document.createElement("textarea");
-    add.style.backgroundColor = "transparent";
-    add.style.border = "none"
-    add.style.outline = "none"
-    add.style.resize = "none"
-    add.placeholder = "Add a comment"
- 
-    const commentDiv = document.createElement("div")
-    commentDiv.style.cssText = `
-      margin: 0 10px;
-      display: flex;
-      align-items: baseline;
-      justify-content: space-between;
-    `
-    if (character.comments){
-      add.value = character.comments;
-    }
-   
-    const editButton = document.createElement("button");
-    editButton.innerText = "Edit";
-    editButton.style.cssText = `
-      background-color: #808080; /* Grå farge */
-      color: white; /* Hvit tekst */
-      border: 1px solid #707070; /* Grått border */
-      border-radius: 20px; /* Gjør knappene runde */
-      padding: 5px 10px; /* Små knapper */
-      font-size: 12px; /* Mindre tekst */
-      cursor: pointer; /* Endre musepeker */
-      margin: 5px; /* Liten avstand mellom knappene */
-    `;
-    editButton.addEventListener("click", () => addCommentsCrud({...character, comments: add.value}));
- 
-    const clearButton = document.createElement("button");
-    clearButton.innerText = "Clear";
-    clearButton.style.cssText = `
-    background-color: #808080; /* Grå farge */
-    color: white; /* Hvit tekst */
-    border: 1px solid #707070; /* Grått border */
-    border-radius: 20px; /* Gjør knappene runde */
-    padding: 5px 10px; /* Små knapper */
-    font-size: 12px; /* Mindre tekst */
-    cursor: pointer; /* Endre musepeker */
-    margin: 5px; /* Liten avstand mellom knappene */
+//legger til kommentarfelt edit/delete knapp i characterCard i favoritt siden
+if (character._id) {
+  const add = document.createElement("textarea");
+  add.style.backgroundColor = "transparent";
+  add.style.border = "none";
+  add.style.outline = "none";
+  add.style.resize = "none";
+  add.placeholder = "Add a comment";
+
+  //lager en div kommentarfeltet blir lagt
+  const commentDiv = document.createElement("div");
+  commentDiv.style.cssText = `
+    margin: 0 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   `;
-    clearButton.addEventListener("click", async () => {
-      await addCommentsCrud({...character, comments: ""})
-      add.value = "";
-   
-  });
-   
-    characterDiv.appendChild(commentDiv)
-    commentDiv.appendChild(add);
-    commentDiv.appendChild(editButton)
-    commentDiv.appendChild(clearButton)
+
+  if (character.comments) {
+    add.value = character.comments;
   }
- 
+
+  // Oppdaterer visning av clearButton basert på om textarea har innhold eller ikke
+  const updateClearButtonVisibility = () => {
+    clearButton.style.display = add.value ? "block" : "none";
+  };
+
+  const clearButton = document.createElement("button");
+  clearButton.innerText = "Clear";
+  clearButton.style.cssText = `
+    background-color: #808080;
+    color: white; 
+    border: 1px solid #707070;
+    border-radius: 20px;
+    padding: 5px 10px;
+    font-size: 12px; 
+    cursor: pointer; 
+    margin: 5px; 
+    display: none; 
+  `;
+  clearButton.addEventListener("click", async () => {
+    await addCommentsCrud({ ...character, comments: "" });
+    add.value = ""; // Tømmer textarea
+    updateClearButtonVisibility(); // Oppdaterer visningen av clearButton
+  });
+
+  // Implementerer en debounce-funksjon for å lagre kommentarer automatisk etter brukerinput
+  let debounceTimer;
+  const debounceSave = (callback, delay = 1000) => {
+    clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(callback, delay);
+  };
+
+  add.addEventListener("input", () => {
+    debounceSave(async () => {
+      await addCommentsCrud({ ...character, comments: add.value });
+      updateClearButtonVisibility(); // Oppdaterer clearButton basert på ny tekst
+    });
+    updateClearButtonVisibility(); // Umiddelbar visuell feedback
+  });
+
+  // Initial visningslogikk for clearButton
+  updateClearButtonVisibility();
+
+  commentDiv.appendChild(add);
+  commentDiv.appendChild(clearButton);
+  characterDiv.appendChild(commentDiv);
+}
+
   return characterDiv;
 };
  
