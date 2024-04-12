@@ -1,5 +1,5 @@
 //funksjon som sender favoritt til localstorage og poster til crudcrud når man trykker på hjertet
-const url = "https://crudcrud.com/api/2f342e16b33a4addbdea72e80bf1ffb0/resource";
+const url = "https://crudcrud.com/api/3de91dcfb89a4d588274b226a6e52ac9/resource";
 export const addFavouriteCrud = async (character) => {
   let favoriteList = JSON.parse(localStorage.getItem("favorittList")) || [];
   favoriteList.push(character);
@@ -63,7 +63,7 @@ export const deleteFavouriteCrud = async (characterId) => {
 };
 
 
-export const characterCard = (character) => {
+export const characterCard = (character, favoriteList = []) => {
   const image = character.images.icon;
  
   // bestemmer farge basert på rarity
@@ -143,7 +143,7 @@ export const characterCard = (character) => {
   icon.style.right = "0";
   icon.style.zIndex = "999";
   icon.style.margin = "20px";
-  icon.style.color = checkIfFavorite(character) ? "#9f32ac" : "white";
+  icon.style.color = checkIfFavorite(character, favoriteList) ? "#9f32ac" : "white";
   icon.addEventListener("mouseenter", () => {
     icon.style.filter = "brightness(1)";
   });
@@ -153,7 +153,7 @@ export const characterCard = (character) => {
  
   icon.addEventListener("click", async () => {
    
-    if (!checkIfFavorite(character)) {
+    if (!checkIfFavorite(character, favoriteList)) {
       await addFavouriteCrud(character);
       changeHeartColor(true);
       showNotification("Added to favourites!");
@@ -284,8 +284,8 @@ const navigateToInfoPage = (id) => {
 };
  
 // Funksjon for å sjekke om et element er i favoritter
-const checkIfFavorite = (data) => {//må sjekkes opp
-  return data._id;
+const checkIfFavorite = (data, favoriteList = []) => {//må sjekkes opp
+  //hvis data har _id = true || etter if kjører favoritelist.find, sjekke om find har samme id som data.id
 };
  
 export const showFavorites = async () => {

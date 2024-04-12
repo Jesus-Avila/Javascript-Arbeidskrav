@@ -1,12 +1,17 @@
-import { characterCard } from "./helpers.js";
+import { characterCard, url } from "./helpers.js";
 let characterData; // Definerer en global variabel for å lagre karakterdata
+let favoriteList;
 
 const fetchData = async () => {
   try {
-    const response = await fetch("https://fortnite-api.com/v2/cosmetics/br/");
-    if (!response.ok) {
+    const [response, response2] = await Promise.all([
+      fetch("https://fortnite-api.com/v2/cosmetics/br/"),
+      fetch (`${url}`)])
+    
+    if (!response.ok || !response2.ok) {
       throw new Error("Network response was not ok");
     }
+    favoriteList = await response2.json();
     const responseData = await response.json();
     characterData = responseData.data;
     shuffleArray(characterData);
@@ -33,7 +38,7 @@ const characterCards = (data) => {
 
 //Henter ut 50 elementer fra api om gangen
   for (let i = 0; i < Math.min(data.length, 150); i++) {
-    const characterDiv = characterCard(data[i]);
+    const characterDiv = characterCard(data[i], favoriteList);
     characterListDiv.appendChild(characterDiv);
   }
 };
