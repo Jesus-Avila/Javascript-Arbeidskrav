@@ -219,7 +219,7 @@ export const characterCard = (character, favoriteList = []) => {
   // Notifikasjon melding
   const showNotification = (message) => {
     notification.textContent = message;
-    notification.style.cssText = display = "flex";
+    notification.style.display = "flex";
     notification.style.justifyContent = "center";
     notification.style.alignItems = "center";
     notification.style.transition = "0.3s";

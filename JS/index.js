@@ -6,7 +6,7 @@ const fetchData = async () => {
   try {
     const [response, response2] = await Promise.all([
       fetch("https://fortnite-api.com/v2/cosmetics/br/"),
-      fetch (`${url}`)])
+      fetch (`${url}`)])//crud api'et
     
     if (!response.ok || !response2.ok) {
       throw new Error("Network response was not ok");
