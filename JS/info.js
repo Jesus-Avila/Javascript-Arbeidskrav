@@ -54,7 +54,6 @@ function displayCosmetic(data) {
 const fetchAndDisplayCosmetic = async (newCosmeticID) => {
     try {
         data = await fetchCosmetic(newCosmeticID);
-        console.log('yesyesyesyes', newCosmeticID);
         displayCosmetic(data);
         favoriteList = await getFavoritesList();
         favorite = await getFavorite(data, favoriteList);
@@ -129,13 +128,15 @@ const changeCardColor = (data) => {
 // Eventlistener og kaller på funksjonen addFavourite
 const addFavouriteButton = document.querySelector('#addToFavoritesBtn');
 addFavouriteButton.addEventListener('click', async () => {
-        if (!favorite) {
+    let favorites = await getFavoritesList();
+    let newFavorite = await getFavorite(data, favorites);
+        if (!newFavorite) {
           favorite = await addFavouriteCrud(data);
           changeButtonText(true);
           console.log('added to favorite from clicking button:', favorite);
           
         } else {
-          await deleteFavouriteCrud(favorite._id);
+           await deleteFavouriteCrud(favorite._id);
           changeButtonText(false);
           console.log('removed from favorite from clicking button:', favorite);
         }
@@ -166,24 +167,6 @@ const extractIdById = (array, idToFind) => {
         }
     }
     return null;
-}
-
-// Funksjon for å sjekke om et element er i favoritter
-// let favoriteList;
-// const checkIfFavorite = async (cosmId) => {
-//     favoriteList = await getFavoritesList();
-//     console.log('Favorite list fetched in checkiffavorite function', favoriteList);
-//     let isFavorite =  favoriteList.some((favorite) => favorite.id === cosmId);
-//     console.log('cosmid:', cosmId);
-//     console.log('isFavorite:', isFavorite);
-//     return isFavorite;
-// }
-
-const getFavoriteId = async (cosmId) => {
-    favoriteList = await getFavoritesList();
-    let extractedId = extractIdById(favoriteList, cosmId); // Call extractIdById with the correct arguments
-    console.log('Extracted ID;', extractedId); // Log the extracted ID
-    return extractedId;
 }
 
 
