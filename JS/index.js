@@ -58,17 +58,3 @@ searchField.addEventListener("input", (event) => {
   characterCards(filteredCharacters, filteredCharacters.length);
 console.log(searchInput)
 });
-
-
-//test
-// Footer-styling
-// const socialIcon = document.querySelector('.icons');
-
-// // //  Legger til en mouseenter event listener for ikonet
-// socialIcon.addEventListener('mouseenter', () => {
-//   socialIcon.querySelector('img').style.filter = 'brightness(70%)';
-// })
-// // // Legger til en mouseleave event listener for ikonet
-// socialIcon.addEventListener('mouseleave', () => {
-//   socialIcon.querySelector('img').style.filter = 'brightness(100%)';
-// });ialIcon.style.transform = 'scale(1)';
