@@ -49,7 +49,7 @@ searchField.addEventListener("input", (event) => {
   const searchInput = event.target.value.toLowerCase();
   const filteredCharacters = characterData
   .filter((character) => character.name.toLowerCase().includes(searchInput))
-  .slice(0, 50);
+  .slice(0, 50);//søkefeltet tar hensyns til grensen på 50 
   characterCards(filteredCharacters, filteredCharacters.length);
 console.log(searchInput)
 });
