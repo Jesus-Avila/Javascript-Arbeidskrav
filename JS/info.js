@@ -1,7 +1,10 @@
-import { addFavouriteCrud, deleteFavouriteCrud } from "./helpers.js";
+import { addFavouriteCrud, deleteFavouriteCrud, getFavorite, url } from "./helpers.js";
 const baseURL = 'https://fortnite-api.com/v2/cosmetics/br/';
+const urlCrud = url;
 let data;
 let newCosmeticID;
+let favoriteList;
+let favorite;
 
 const namePlaceholder = document.querySelector('#cosmeticName');
 const cosmeticImageContainer = document.querySelector('#cosmeticImageContainer');
@@ -23,12 +26,6 @@ const fetchCosmetic = async (newCosmeticID) => {
         console.error('Error:', error);
     }    
 };
-
-// Funksjon for å endre tekst på knapp basert på om favoritt er lagt til
-const changeButtonText = () => {
-    checkIfFavorite() ? addFavouriteButton.innerHTML = "Remove from favourites" : addFavouriteButton.innerHTML = "Add to favourites";
-};
-
 
 
 // Display av data
@@ -59,7 +56,10 @@ const fetchAndDisplayCosmetic = async (newCosmeticID) => {
         data = await fetchCosmetic(newCosmeticID);
         console.log('yesyesyesyes', newCosmeticID);
         displayCosmetic(data);
-        changeButtonText();
+        favoriteList = await getFavoritesList();
+        favorite = await getFavorite(data, favoriteList);
+        console.log('favorite:', favorite);
+        changeButtonText(favorite);
     } catch (error) {
         console.error('Error:', error);
     }
@@ -129,22 +129,24 @@ const changeCardColor = (data) => {
 // Eventlistener og kaller på funksjonen addFavourite
 const addFavouriteButton = document.querySelector('#addToFavoritesBtn');
 addFavouriteButton.addEventListener('click', async () => {
-    console.log('data:', data.id);
-    let is = await checkIfFavorite(newCosmeticID);
-    if (!is){
-        addFavouriteCrud(data);
-        changeButtonText();
-    } else {
-        let idididid = await getFavoriteId(newCosmeticID);
-        idididid = idididid.toString();
-        deleteFavouriteCrud(idididid);
-        changeButtonText();
-        console.log('already in favorites');
-    }
-})
+        if (!favorite) {
+          favorite = await addFavouriteCrud(data);
+          changeButtonText(true);
+          console.log('added to favorite from clicking button:', favorite);
+          
+        } else {
+          await deleteFavouriteCrud(favorite._id);
+          changeButtonText(false);
+          console.log('removed from favorite from clicking button:', favorite);
+        }
+      });
+
+// Funksjon for å endre tekst på knapp basert på om favoritt er lagt til
+const changeButtonText = (favorite) => {
+    addFavouriteButton.innerHTML = favorite ? 'Remove from favorites' : 'Add to favorites';
+};
 
 // hente data fra crud crud
-const urlCrud = "https://crudcrud.com/api/3de91dcfb89a4d588274b226a6e52ac9/resource";
 const getFavoritesList = async () => { 
     const response = await fetch (urlCrud);
     
@@ -167,15 +169,15 @@ const extractIdById = (array, idToFind) => {
 }
 
 // Funksjon for å sjekke om et element er i favoritter
-let favoriteList;
-const checkIfFavorite = async (cosmId) => {
-    favoriteList = await getFavoritesList();
-    console.log('Favorite list fetched in checkiffavorite function', favoriteList);
-    let isFavorite =  favoriteList.some((favorite) => favorite.id === cosmId);
-    console.log('cosmid:', cosmId);
-    console.log('isFavorite:', isFavorite);
-    return isFavorite;
-}
+// let favoriteList;
+// const checkIfFavorite = async (cosmId) => {
+//     favoriteList = await getFavoritesList();
+//     console.log('Favorite list fetched in checkiffavorite function', favoriteList);
+//     let isFavorite =  favoriteList.some((favorite) => favorite.id === cosmId);
+//     console.log('cosmid:', cosmId);
+//     console.log('isFavorite:', isFavorite);
+//     return isFavorite;
+// }
 
 const getFavoriteId = async (cosmId) => {
     favoriteList = await getFavoritesList();
