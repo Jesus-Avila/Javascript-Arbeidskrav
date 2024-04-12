@@ -3,19 +3,18 @@ let characterData; // Definerer en global variabel for å lagre karakterdata
 
 const fetchData = async () => {
   try {
-    const response = await fetch("https://fortnite-api.com/v2/cosmetics/br/new");
+    const response = await fetch("https://fortnite-api.com/v2/cosmetics/br/");
     if (!response.ok) {
       throw new Error("Network response was not ok");
     }
     const responseData = await response.json();
-    characterData = responseData.data.items;
+    characterData = responseData.data;
     shuffleArray(characterData);
     characterCards(characterData);
   } catch (error) {
     console.error("Error fetching data:", error);
   }
 };
-
 
 // random skins fra array
 function shuffleArray(array) {
