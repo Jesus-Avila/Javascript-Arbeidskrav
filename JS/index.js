@@ -32,7 +32,7 @@ const characterCards = (data) => {
   characterListDiv.innerHTML = "";
 
 //Henter ut 50 elementer fra api om gangen
-  for (let i = 0; i < Math.min(data.length, 50); i++) {
+  for (let i = 0; i < Math.min(data.length, 150); i++) {
     const characterDiv = characterCard(data[i]);
     characterListDiv.appendChild(characterDiv);
   }
@@ -49,7 +49,7 @@ searchField.addEventListener("input", (event) => {
   const searchInput = event.target.value.toLowerCase();
   const filteredCharacters = characterData
   .filter((character) => character.name.toLowerCase().includes(searchInput))
-  .slice(0, 50);//søkefeltet tar hensyns til grensen på 50 
+  .slice(0, 150);//søkefeltet tar hensyns til grensen på 150 
   characterCards(filteredCharacters, filteredCharacters.length);
 console.log(searchInput)
 });
