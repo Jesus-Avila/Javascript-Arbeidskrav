@@ -34,7 +34,7 @@ h2 {
   width: 90%;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 10vh;
+  margin: 10% 0;
 }
 
 .character-container::-webkit-scrollbar {
