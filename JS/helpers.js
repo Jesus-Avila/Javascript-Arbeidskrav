@@ -1,3 +1,29 @@
+//funksjon som sender favoritt til localstorage og poster til crudcrud når man trykker på hjertet
+const url = "https://crudcrud.com/api/3de91dcfb89a4d588274b226a6e52ac9/resource";
+export const addFavouriteCrud = async (character) => {
+  let favoriteList = JSON.parse(localStorage.getItem("favorittList")) || [];
+  favoriteList.push(character);
+  localStorage.setItem("favorittList", JSON.stringify(favoriteList));
+  try {
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(character),
+    });
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+ 
+    const responseData = await response.json();
+    console.log("Added to CRUD API", responseData);
+  } catch (error) {
+    console.error("There was a problem with the fetch operation:", error);
+  }
+};
+
+//funksjon som endrer
 export const addCommentsCrud = async (character) => {
   try {
     const body = {...character}
@@ -20,7 +46,23 @@ export const addCommentsCrud = async (character) => {
     console.error("There was a problem with the fetch operation:", error);
   }
 };
+
+//Funksjon som sletter
+export const deleteFavouriteCrud = async (characterId) => {
+  try {
+    const response = await fetch (`${url}/${characterId}`, {
+      method: "DELETE",
+    });
  
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+  } catch (error) {
+    console.error("There was a problem with the fetch operation:", error)
+  }
+};
+
+
 export const characterCard = (character) => {
   const image = character.images.icon;
  
@@ -228,45 +270,7 @@ if (character._id) {
   return characterDiv;
 };
  
-//funksjon som sender favoritt til localstorage og poster til crudcrud når man trykker på hjertet
-const url = "https://crudcrud.com/api/3de91dcfb89a4d588274b226a6e52ac9/resource";
-export const addFavouriteCrud = async (character) => {
-  let favoriteList = JSON.parse(localStorage.getItem("favorittList")) || [];
-  favoriteList.push(character);
-  localStorage.setItem("favorittList", JSON.stringify(favoriteList));
-  try {
-    const response = await fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(character),
-    });
-    if (!response.ok) {
-      throw new Error("Network response was not ok");
-    }
- 
-    const responseData = await response.json();
-    console.log("Added to CRUD API", responseData);
-  } catch (error) {
-    console.error("There was a problem with the fetch operation:", error);
-  }
-};
- 
-//Funksjon som sletter
-export const deleteFavouriteCrud = async (characterId) => {
-  try {
-    const response = await fetch (`${url}/${characterId}`, {
-      method: "DELETE",
-    });
- 
-    if (!response.ok) {
-      throw new Error("Network response was not ok");
-    }
-  } catch (error) {
-    console.error("There was a problem with the fetch operation:", error)
-  }
-};
+
  
 //Navigerer til info.html med id til valgt karakter
 const navigateToInfoPage = (id) => {
