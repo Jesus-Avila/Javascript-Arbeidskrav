@@ -311,7 +311,7 @@ const navigateToInfoPage = (id) => {
 };
 
 // Funksjon for å sjekke om et element er i favoritter
-const getFavorite = (data, favoriteList = []) => {
+export const getFavorite = (data, favoriteList = []) => {
   if (data._id) {
     return data;
   }
