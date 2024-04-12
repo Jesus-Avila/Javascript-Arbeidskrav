@@ -14,7 +14,7 @@ const fetchData = async () => {
     favoriteList = await response2.json();
     const responseData = await response.json();
     characterData = responseData.data;
-    //shuffleArray(characterData);
+    shuffleArray(characterData);
     characterCards(characterData);
   } catch (error) {
     console.error("Error fetching data:", error);
