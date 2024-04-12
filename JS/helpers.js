@@ -1,5 +1,5 @@
 //funksjon som sender favoritt til localstorage og poster til crudcrud når man trykker på hjertet
-const url = "https://crudcrud.com/api/3de91dcfb89a4d588274b226a6e52ac9/resource";
+const url = "https://crudcrud.com/api/2f342e16b33a4addbdea72e80bf1ffb0/resource";
 export const addFavouriteCrud = async (character) => {
   let favoriteList = JSON.parse(localStorage.getItem("favorittList")) || [];
   favoriteList.push(character);
