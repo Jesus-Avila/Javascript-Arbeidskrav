@@ -14,6 +14,8 @@ main{
     overflow: scroll;
     gap: 20px;
     width: 90%;
+    align-items: center;
+    justify-content: center;
   }
   
   .favourite-list::-webkit-scrollbar {
