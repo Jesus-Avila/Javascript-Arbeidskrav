@@ -1,4 +1,4 @@
-//funksjon som sender favoritt til localstorage og poster til crudcrud når man trykker på hjertet
+// Funksjon som sender favoritt til localstorage og poster til crudcrud når man trykker på hjertet
 export const url = "https://crudcrud.com/api/3de91dcfb89a4d588274b226a6e52ac9/resource";
 export const addFavouriteCrud = async (character) => {
   let favoriteList = JSON.parse(localStorage.getItem("favorittList")) || [];
@@ -24,7 +24,7 @@ export const addFavouriteCrud = async (character) => {
   }
 };
 
-//funksjon som endrer
+// Funksjon som endrer
 export const addCommentsCrud = async (character) => {
   try {
     const body = { ...character };
@@ -48,7 +48,7 @@ export const addCommentsCrud = async (character) => {
   }
 };
 
-//Funksjon som sletter
+// Funksjon som sletter
 export const deleteFavouriteCrud = async (characterId) => {
   try {
     const response = await fetch(`${url}/${characterId}`, {
@@ -67,7 +67,7 @@ export const characterCard = (character, favoriteList = []) => {
   let favorite = getFavorite(character, favoriteList);
   const image = character.images.icon;
 
-  // bestemmer farge basert på rarity
+  // Bestemmer farge basert på rarity
   let backgroundColor;
 
   switch (character.rarity.value.toLowerCase()) {
@@ -96,7 +96,7 @@ export const characterCard = (character, favoriteList = []) => {
       backgroundColor = "rgba(0, 0, 0)"; // Default: black with the same opacity
   }
 
-  //Karakter div
+  // Karakter div
   const characterDiv = document.createElement("div");
   characterDiv.classList.add("character");
   characterDiv.style.cssText = `
@@ -115,7 +115,7 @@ export const characterCard = (character, favoriteList = []) => {
     characterDiv.style.filter = "brightness(0.5)";
   });
 
-  //Karakter text
+  // Karakter text
   const nameElement = document.createElement("p");
   nameElement.textContent = `${character.name}`;
   nameElement.style.cssText = `
@@ -126,7 +126,7 @@ export const characterCard = (character, favoriteList = []) => {
     z-index: 1;
   `;
 
-  //Karakterbilde
+  // Karakterbilde
   const imageElement = document.createElement("img");
   imageElement.src = image;
   imageElement.alt = character.name;
@@ -140,6 +140,7 @@ export const characterCard = (character, favoriteList = []) => {
   const currentPage = window.location.href;
   const isFrontPage = currentPage.includes("index.html");
 
+// Hjerteikon
   let icon = document.createElement("i");
   if (isFrontPage) {
     icon.style.cssText = `
@@ -167,6 +168,7 @@ export const characterCard = (character, favoriteList = []) => {
     icon.classList.add("fa", "fa-solid", "fa-trash");
   }
 
+  // Hjerteikon filter
   icon.addEventListener("mouseenter", () => {
     icon.style.filter = "brightness(1)";
   });
@@ -190,17 +192,17 @@ export const characterCard = (character, favoriteList = []) => {
     }
   });
 
-  // Funkson for å endre farge på hjerteikonet
+  // Funksjon for å endre farge på hjerteikonet
   const changeHeartColor = (favorite) => {
     icon.style.color = favorite ? "#9f32ac" : "white";
   };
 
-  //Kalle funksjonen navigateToInfoPage ved klikk på karakter kortet
+  // Kalle funksjonen navigateToInfoPage ved klikk på karakter kortet
   imageElement.addEventListener("click", () => {
     navigateToInfoPage(character.id);
   });
 
-  //Notifikasjon
+  // Notifikasjon 
   const notification = document.createElement("p");
   notification.classList.add("notification");
   notification.style.cssText = `
@@ -214,6 +216,7 @@ export const characterCard = (character, favoriteList = []) => {
     height: 100%;
   `;
 
+  // Notifikasjon melding
   const showNotification = (message) => {
     notification.textContent = message;
     notification.style.cssText = display = "flex";
@@ -230,7 +233,7 @@ export const characterCard = (character, favoriteList = []) => {
   characterDiv.appendChild(icon);
   characterDiv.appendChild(notification);
 
-  //legger til kommentarfelt edit/delete knapp i characterCard i favoritt siden
+  // Legger til kommentarfelt edit/delete knapp i characterCard i favoritt siden
   if (character._id) {
     const add = document.createElement("textarea");
     add.style.backgroundColor = "transparent";
@@ -239,7 +242,7 @@ export const characterCard = (character, favoriteList = []) => {
     add.style.resize = "none";
     add.placeholder = "Add a comment";
 
-    //lager en div kommentarfeltet blir lagt
+    // Lager en div kommentarfeltet blir lagt
     const commentDiv = document.createElement("div");
     commentDiv.style.cssText = `
     margin: 0 10px;
@@ -302,7 +305,7 @@ export const characterCard = (character, favoriteList = []) => {
   return characterDiv;
 };
 
-//Navigerer til info.html med id til valgt karakter
+// Navigerer til info.html med id til valgt karakter
 const navigateToInfoPage = (id) => {
   window.location.href = `info.html?cosmeticID=${encodeURIComponent(id)}`;
 };
