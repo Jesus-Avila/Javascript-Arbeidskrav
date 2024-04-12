@@ -162,7 +162,9 @@ export const characterCard = (character, favoriteList = []) => {
       showNotification("Added to favourites!");
     } else {
       await deleteFavouriteCrud(favorite._id)
-      showFavorites()
+      if (!isFrontPage) {
+        await showFavorites()
+      }
       changeHeartColor(false);
       showNotification("Removed from favourites!");
     }
