@@ -71,23 +71,30 @@ export const characterCard = (character) => {
  
   switch (character.rarity.value.toLowerCase()) {
     case "uncommon":
-      backgroundColor = "rgba(0, 128, 0, 0.5)";
-      break;
+        backgroundColor = "rgba(0, 128, 0, 0.5)";
+        break;
     case "common":
-      backgroundColor = "rgba(128, 128, 128, 0.5)";
-      break;
+        backgroundColor = "rgba(128, 128, 128, 0.5)";
+        break;
     case "rare":
-      backgroundColor = "rgba(0, 0, 255, 0.5)";
-      break;
+        backgroundColor = "rgba(0, 0, 255, 0.5)";
+        break;
     case "epic":
-      backgroundColor = "rgba(128, 0, 128, 0.5)";
-      break;
+        backgroundColor = "rgba(128, 0, 128, 0.5)";
+        break;
     case "legendary":
-      backgroundColor = "rgba(255, 165, 0, 0.5)";
-      break;
+        backgroundColor = "rgba(255, 165, 0, 0.5)";
+        break;
+    case "mythic":
+        backgroundColor = "rgba(255, 223, 0, 0.5)";  // Mythic: yellow with the same opacity
+        break;
+    case "exotic":
+        backgroundColor = "rgba(64, 224, 208, 0.5)";  // Exotic: turquoise with the same opacity
+        break;
     default:
-      backgroundColor = "rgba(64, 224, 208, 0.5)";
-  }
+        backgroundColor = "rgba(0, 0, 0, 0.5)";  // Default: black with the same opacity
+}
+
  
   //Karakter div
   const characterDiv = document.createElement("div");
@@ -122,7 +129,7 @@ export const characterCard = (character) => {
   imageElement.style.objectFit = "cover";
   imageElement.style.zIndex = "1";
   const currentPage = window.location.href;
-  const pageName = currentPage.substring(currentPage.lastIndexOf("/") + 1);
+
   let icon = document.createElement("i");
   if (currentPage.includes("index.html")) {
     icon.classList.add("fa", "fa-heart", "heartIcon");

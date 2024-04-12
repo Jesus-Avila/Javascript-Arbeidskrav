@@ -113,10 +113,17 @@ const changeCardColor = (data) => {
       case "legendary":
         cosmeticInfoCard.style.backgroundColor = "rgba(255, 165, 0, 0.5)";
         break;
+      case "mythic":
+        cosmeticInfoCard.style.backgroundColor = "rgba(255, 223, 0, 0.5)"; // Mythic: yellow with the same opacity
+        break;
+      case "exotic":
+        cosmeticInfoCard.style.backgroundColor = "rgba(64, 224, 208, 0.5)"; // Exotic: turquoise with the same opacity
+        break;
       default:
-        cosmeticInfoCard.style.backgroundColor = "rgba(64, 224, 208, 0.5)"; // Default color
+        cosmeticInfoCard.style.backgroundColor = "rgba(0, 0, 0, 0.5)"; // Default: black with the same opacity
     }
 };
+
 
 
 // Eventlistener og kaller på funksjonen addFavourite
