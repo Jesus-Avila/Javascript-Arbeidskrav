@@ -89,12 +89,9 @@ ul li a {
 
 /*footer-section*/
 
-footer {
-  padding: 30px;
-}
 
 .social-media-container {
-  background-color: #a032ac2a;
+  background: linear-gradient(to top, #4c0c54, transparent);
   width: 100%;
   padding: 70px 30px 30px;
 }
