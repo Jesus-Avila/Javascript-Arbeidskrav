@@ -33,18 +33,6 @@ body {
   }
 }
 
-button {
-  background-color: #383d53;
-  padding: 10px 25px;
-  font-size: 1.3em;
-  border-radius: 10px;
-  transition: 0.3s;
-}
-
-button:hover {
-  background-color: #20263d;
-}
-
 /*header*/
 
 nav {
