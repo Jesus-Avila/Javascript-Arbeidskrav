@@ -18,6 +18,7 @@ export const addFavouriteCrud = async (character) => {
  
     const responseData = await response.json();
     console.log("Added to CRUD API", responseData);
+    return responseData
   } catch (error) {
     console.error("There was a problem with the fetch operation:", error);
   }
@@ -64,6 +65,7 @@ export const deleteFavouriteCrud = async (characterId) => {
 
 
 export const characterCard = (character, favoriteList = []) => {
+  let favorite = getFavorite(character, favoriteList)
   const image = character.images.icon;
  
   // bestemmer farge basert på rarity
@@ -143,31 +145,30 @@ export const characterCard = (character, favoriteList = []) => {
   icon.style.right = "0";
   icon.style.zIndex = "999";
   icon.style.margin = "20px";
-  icon.style.color = checkIfFavorite(character, favoriteList) ? "#9f32ac" : "white";
+  icon.style.color = favorite ? "#9f32ac" : "white";
   icon.addEventListener("mouseenter", () => {
     icon.style.filter = "brightness(1)";
   });
   icon.addEventListener("mouseleave", () => {
     icon.style.filter = "brightness(0.5)";
   });
- 
+
   icon.addEventListener("click", async () => {
    
-    if (!checkIfFavorite(character, favoriteList)) {
-      await addFavouriteCrud(character);
+    if (!favorite) {
+      favorite = await addFavouriteCrud(character);
       changeHeartColor(true);
       showNotification("Added to favourites!");
     } else {
-      await deleteFavouriteCrud(character._id)
-      await showFavorites();
+      await deleteFavouriteCrud(favorite._id)
       changeHeartColor(false);
       showNotification("Removed from favourites!");
     }
   });
  
   // Funkson for å endre farge på hjerteikonet
-  const changeHeartColor = (isFavorite) => {
-    icon.style.color = isFavorite ? "#9f32ac" : "white";
+  const changeHeartColor = (favorite) => {
+    icon.style.color = favorite ? "#9f32ac" : "white";
   };
   
   //Kalle funksjonen navigateToInfoPage ved klikk på karakter kortet
@@ -283,14 +284,12 @@ const navigateToInfoPage = (id) => {
 };
  
 // Funksjon for å sjekke om et element er i favoritter
-const checkIfFavorite = (data, favoriteList = []) => {
+const getFavorite = (data, favoriteList = []) => {
   if (data._id){
-    const isFavorite = favoriteList.find(item => item._id === data._id)
-    return !isFavorite;
+    return data;
   }
-  return false;
-
-  //hvis data har _id = true || etter if kjører favoritelist.find, sjekke om find har samme id som data.id
+ return favoriteList.find(item => item.id === data.id)
+ 
 };
  
 export const showFavorites = async () => {
