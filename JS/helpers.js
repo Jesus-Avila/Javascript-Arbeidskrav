@@ -155,23 +155,22 @@ export const characterCard = (character) => {
    
     if (!checkIfFavorite(character)) {
       await addFavouriteCrud(character);
-      changeHeartColor(character);
+      changeHeartColor(true);
       showNotification("Added to favourites!");
     } else {
       await deleteFavouriteCrud(character._id)
       //removeFavorite(character);
       await showFavorites();
-      changeHeartColor(character);
+      changeHeartColor(false);
       showNotification("Removed from favourites!");
     }
   });
  
   // Funkson for å endre farge på hjerteikonet
-  const changeHeartColor = (data) => {
-    console.log("changeHeartColor:", data);
-    checkIfFavorite(data) ? (icon.style.color = "#9f32ac") : (icon.style.color = "white");
+  const changeHeartColor = (isFavorite) => {
+    icon.style.color = isFavorite ? "#9f32ac" : "white";
   };
- 
+  
   //Kalle funksjonen navigateToInfoPage ved klikk på karakter kortet
   imageElement.addEventListener("click", () => {
     navigateToInfoPage(character.id);
