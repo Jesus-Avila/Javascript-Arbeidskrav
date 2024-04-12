@@ -1,4 +1,4 @@
-import { addFavouriteCrud, deleteFavouriteCrud, getFavorite, url } from "./helpers.js";
+import { addFavouriteCrud, deleteFavouriteCrud, getFavorite, url, getFavoritesList } from "./helpers.js";
 const baseURL = 'https://fortnite-api.com/v2/cosmetics/br/';
 const urlCrud = url;
 let data;
@@ -55,7 +55,7 @@ const fetchAndDisplayCosmetic = async (newCosmeticID) => {
     try {
         data = await fetchCosmetic(newCosmeticID);
         displayCosmetic(data);
-        favoriteList = await getFavoritesList();
+        favoriteList = await getFavoritesList(urlCrud);
         favorite = await getFavorite(data, favoriteList);
         console.log('favorite:', favorite);
         changeButtonText(favorite);
@@ -128,7 +128,7 @@ const changeCardColor = (data) => {
 // Eventlistener og kaller på funksjonen addFavourite
 const addFavouriteButton = document.querySelector('#addToFavoritesBtn');
 addFavouriteButton.addEventListener('click', async () => {
-    let favorites = await getFavoritesList();
+    let favorites = await getFavoritesList(urlCrud);
     let newFavorite = await getFavorite(data, favorites);
         if (!newFavorite) {
           favorite = await addFavouriteCrud(data);
@@ -136,9 +136,9 @@ addFavouriteButton.addEventListener('click', async () => {
           console.log('added to favorite from clicking button:', favorite);
           
         } else {
-           await deleteFavouriteCrud(favorite._id);
-          changeButtonText(false);
-          console.log('removed from favorite from clicking button:', favorite);
+            await deleteFavouriteCrud(favorite._id);
+            changeButtonText(false);
+            console.log('removed from favorite from clicking button:', favorite);
         }
       });
 
@@ -146,28 +146,5 @@ addFavouriteButton.addEventListener('click', async () => {
 const changeButtonText = (favorite) => {
     addFavouriteButton.innerHTML = favorite ? 'Remove from favorites' : 'Add to favorites';
 };
-
-// hente data fra crud crud
-const getFavoritesList = async () => { 
-    const response = await fetch (urlCrud);
-    
-    if (!response.ok) {
-        throw new Error("Network response was not ok");
-    }
-    const favorites = await response.json();
-    console.log("Log from getfavoritelist function", favorites);
-    return favorites;
-};
-  
-// Funksjon for å hente ut _id basert på id i array som blir hentet fra crud crud
-const extractIdById = (array, idToFind) => {
-    for (let i = 0; i < array.length; i++) {
-        if (array[i].id === idToFind) { // Check if the current object's id matches the idToFind
-            return array[i]._id; // If it matches, return the _id property
-        }
-    }
-    return null;
-}
-
 
 

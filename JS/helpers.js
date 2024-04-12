@@ -178,7 +178,9 @@ export const characterCard = (character, favoriteList = []) => {
   });
 
   icon.addEventListener("click", async () => {
-    if (!favorite) {
+    let favorites = await getFavoritesList(url);
+    let newFavorite = await getFavorite(character, favorites);
+    if (!newFavorite) {
       favorite = await addFavouriteCrud(character);
       changeHeartColor(true);
       showNotification("Added to favourites!");
@@ -337,4 +339,17 @@ export const showFavorites = async () => {
     });
   }
   return favoriteList;
+};
+
+
+// hente all data fra crud crud
+export const getFavoritesList = async (crudURL) => { 
+  const response = await fetch (crudURL);
+  
+  if (!response.ok) {
+      throw new Error("Network response was not ok");
+  }
+  const favorites = await response.json();
+  console.log("Log from getfavoritelist function", favorites);
+  return favorites;
 };
