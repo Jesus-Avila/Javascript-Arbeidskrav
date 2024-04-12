@@ -128,8 +128,9 @@ export const characterCard = (character, favoriteList = []) => {
 
   // Karakterbilde
   const imageElement = document.createElement("img");
-  imageElement.src = image;
+  imageElement.src = image || "https://fortnite-api.com/images/cosmetics/br/pickaxe_id_606_shrapnelfemale/icon.png";
   imageElement.alt = character.name;
+  imageElement.loading = "lazy" //bildet lastes bare når det er synlig
   imageElement.style.cssText = `
     width: 300px;
     height: 400px;
@@ -188,7 +189,8 @@ export const characterCard = (character, favoriteList = []) => {
       await deleteFavouriteCrud(favorite._id);
       if (!isFrontPage) {
         await showFavorites();
-      }
+      } 
+      favorite = null
       changeHeartColor(false);
       showNotification("Removed from favourites!");
     }
