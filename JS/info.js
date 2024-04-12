@@ -99,28 +99,28 @@ window.addEventListener("popstate", () => {
 const changeCardColor = (data) => {
     switch (data.rarity.value.toLowerCase()) {
       case "uncommon":
-        cosmeticInfoCard.style.backgroundColor = "rgba(0, 128, 0, 0.5)";
+        cosmeticInfoCard.style.backgroundColor = "rgba(0, 128, 0)";
         break;
       case "common":
-        cosmeticInfoCard.style.backgroundColor = "rgba(128, 128, 128, 0.5)";
+        cosmeticInfoCard.style.backgroundColor = "rgba(128, 128, 128)";
         break;
       case "rare":
-        cosmeticInfoCard.style.backgroundColor = "rgba(0, 0, 255, 0.5)";
+        cosmeticInfoCard.style.backgroundColor = "rgba(0, 0, 255)";
         break;
       case "epic":
-        cosmeticInfoCard.style.backgroundColor = "rgba(128, 0, 128, 0.5)";
+        cosmeticInfoCard.style.backgroundColor = "rgba(128, 0, 128)";
         break;
       case "legendary":
-        cosmeticInfoCard.style.backgroundColor = "rgba(255, 165, 0, 0.5)";
+        cosmeticInfoCard.style.backgroundColor = "rgba(255, 165, 0)";
         break;
       case "mythic":
-        cosmeticInfoCard.style.backgroundColor = "rgba(255, 223, 0, 0.5)"; // Mythic: yellow with the same opacity
+        cosmeticInfoCard.style.backgroundColor = "rgba(255, 223, 0)"; // Mythic: yellow with the same opacity
         break;
       case "exotic":
-        cosmeticInfoCard.style.backgroundColor = "rgba(64, 224, 208, 0.5)"; // Exotic: turquoise with the same opacity
+        cosmeticInfoCard.style.backgroundColor = "rgba(64, 224, 208)"; // Exotic: turquoise with the same opacity
         break;
       default:
-        cosmeticInfoCard.style.backgroundColor = "rgba(0, 0, 0, 0.5)"; // Default: black with the same opacity
+        cosmeticInfoCard.style.backgroundColor = "rgba(0, 0, 0)"; // Default: black with the same opacity
     }
 };
 

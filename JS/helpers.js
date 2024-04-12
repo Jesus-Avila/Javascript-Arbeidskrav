@@ -71,28 +71,28 @@ export const characterCard = (character, favoriteList = []) => {
  
   switch (character.rarity.value.toLowerCase()) {
     case "uncommon":
-        backgroundColor = "rgba(0, 128, 0, 0.5)";
+        backgroundColor = "rgba(0, 128, 0)";
         break;
     case "common":
-        backgroundColor = "rgba(128, 128, 128, 0.5)";
+        backgroundColor = "rgba(128, 128, 128)";
         break;
     case "rare":
-        backgroundColor = "rgba(0, 0, 255, 0.5)";
+        backgroundColor = "rgba(0, 0, 255)";
         break;
     case "epic":
-        backgroundColor = "rgba(128, 0, 128, 0.5)";
+        backgroundColor = "rgba(128, 0, 128)";
         break;
     case "legendary":
-        backgroundColor = "rgba(255, 165, 0, 0.5)";
+        backgroundColor = "rgba(255, 165, 0)";
         break;
     case "mythic":
-        backgroundColor = "rgba(255, 223, 0, 0.5)";  // Mythic: yellow with the same opacity
+        backgroundColor = "rgba(255, 223, 0)";  // Mythic: yellow with the same opacity
         break;
     case "exotic":
-        backgroundColor = "rgba(64, 224, 208, 0.5)";  // Exotic: turquoise with the same opacity
+        backgroundColor = "rgba(64, 224, 208)";  // Exotic: turquoise with the same opacity
         break;
     default:
-        backgroundColor = "rgba(0, 0, 0, 0.5)";  // Default: black with the same opacity
+        backgroundColor = "rgba(0, 0, 0)";  // Default: black with the same opacity
 }
 
  
