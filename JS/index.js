@@ -16,7 +16,7 @@ const fetchData = async () => {
   }
 };
 
-// random skins fra array
+// random cosmetics fra array
 function shuffleArray(array) {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -31,8 +31,8 @@ const characterCards = (data) => {
   const characterListDiv = document.getElementById("characterContainer");
   characterListDiv.innerHTML = "";
 
-
-  for (let i = 0; i < data.length; i++) {
+//Henter ut 50 elementer fra api om gangen
+  for (let i = 0; i < Math.min(data.length, 50); i++) {
     const characterDiv = characterCard(data[i]);
     characterListDiv.appendChild(characterDiv);
   }
@@ -47,7 +47,9 @@ searchField.style.width = "200px"
 
 searchField.addEventListener("input", (event) => {
   const searchInput = event.target.value.toLowerCase();
-  const filteredCharacters = characterData.filter((character) => character.name.toLowerCase().includes(searchInput));
+  const filteredCharacters = characterData
+  .filter((character) => character.name.toLowerCase().includes(searchInput))
+  .slice(0, 50);
   characterCards(filteredCharacters, filteredCharacters.length);
 console.log(searchInput)
 });
