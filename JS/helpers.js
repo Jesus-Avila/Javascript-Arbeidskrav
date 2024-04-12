@@ -131,11 +131,13 @@ export const characterCard = (character, favoriteList = []) => {
   imageElement.style.objectFit = "cover";
   imageElement.style.zIndex = "1";
   const currentPage = window.location.href;
-
+  const isFrontPage = currentPage.includes("index.html")
   let icon = document.createElement("i");
-  if (currentPage.includes("index.html")) {
+  if (isFrontPage) {
+    icon.style.color = favorite ? "#9f32ac" : "white";
     icon.classList.add("fa", "fa-heart", "heartIcon");
   } else {
+    icon.style.color = "white"
     icon.classList.add("fa", "fa-solid", "fa-trash");
   }
   icon.style.fontSize = "36px";
@@ -145,7 +147,6 @@ export const characterCard = (character, favoriteList = []) => {
   icon.style.right = "0";
   icon.style.zIndex = "999";
   icon.style.margin = "20px";
-  icon.style.color = favorite ? "#9f32ac" : "white";
   icon.addEventListener("mouseenter", () => {
     icon.style.filter = "brightness(1)";
   });
@@ -161,6 +162,7 @@ export const characterCard = (character, favoriteList = []) => {
       showNotification("Added to favourites!");
     } else {
       await deleteFavouriteCrud(favorite._id)
+      await showFavorites()
       changeHeartColor(false);
       showNotification("Removed from favourites!");
     }
