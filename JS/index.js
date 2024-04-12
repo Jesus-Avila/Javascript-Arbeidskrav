@@ -54,7 +54,7 @@ console.log(searchInput)
 });
 
 
-
+//test
 // Footer-styling
 // const socialIcon = document.querySelector('.icons');
 
