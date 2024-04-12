@@ -40,12 +40,16 @@ h2 {
 .character-container::-webkit-scrollbar {
   width: 10px; 
   background-color: transparent; 
+
 }
 
 .character-container::-webkit-scrollbar-thumb {
   background-color: rgba(27, 33, 75, 0.5); 
   border-radius: 5px; 
   cursor: pointer;
+}
+.character-container::-webkit-scrollbar-thumb:hover {
+  background-color: rgb(27, 33, 75);
 }
 
 .character-container::-webkit-scrollbar-track {
