@@ -284,7 +284,13 @@ const navigateToInfoPage = (id) => {
 };
  
 // Funksjon for å sjekke om et element er i favoritter
-const checkIfFavorite = (data, favoriteList = []) => {//må sjekkes opp
+const checkIfFavorite = (data, favoriteList = []) => {
+  if (data._id){
+    const isFavorite = favoriteList.find(item => item._id === data._id)
+    return !isFavorite;
+  }
+  return false;
+
   //hvis data har _id = true || etter if kjører favoritelist.find, sjekke om find har samme id som data.id
 };
  
