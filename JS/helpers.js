@@ -122,7 +122,7 @@ export const characterCard = (character, favoriteList = []) => {
     font-size: 36px;
     position: absolute;
     bottom: 0;
-    margin: 60px 10px;
+    margin: 40px 10px;
     z-index: 1;
   `;
 
@@ -239,17 +239,20 @@ export const characterCard = (character, favoriteList = []) => {
 
   // Legger til kommentarfelt edit/delete knapp i characterCard i favoritt siden
   if (character._id) {
-    const add = document.createElement("textarea");
-    add.style.backgroundColor = "transparent";
-    add.style.border = "none";
-    add.style.outline = "none";
-    add.style.resize = "none";
+    const add = document.createElement("input");
+    add.style.cssText = `
+    background-color: transparent;
+    margin: 10px 10px;
+    border: none;
+    outline: none;
+    resize: none;
+    font-size: 20px;
+  `;
     add.placeholder = "Add a comment";
 
     // Lager en div kommentarfeltet blir lagt
     const commentDiv = document.createElement("div");
     commentDiv.style.cssText = `
-    margin: 0 10px;
     display: flex;
     align-items: center;
     justify-content: space-between;
