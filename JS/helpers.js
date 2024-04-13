@@ -2,9 +2,6 @@
 export const url = "https://crudcrud.com/api/2f342e16b33a4addbdea72e80bf1ffb0/resource";
 export const baseURL = "https://fortnite-api.com/v2/cosmetics/br/";
 export const addFavouriteCrud = async (character) => {
-  let favoriteList = JSON.parse(localStorage.getItem("favorittList")) || [];
-  favoriteList.push(character);
-  localStorage.setItem("favorittList", JSON.stringify(favoriteList));
   try {
     const response = await fetch(url, {
       method: "POST",
