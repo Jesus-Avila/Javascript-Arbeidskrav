@@ -5,14 +5,12 @@
   top: 20px;
 }
 
-
-
 .cosmetic-card {
   background: #20263d;
   max-width: 800px;
   position: relative;
   padding: 40px;
-  margin: 40px auto;
+  margin: 10vh auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -82,12 +80,11 @@ h2 {
 
 
 #addToFavoritesBtn {
-  background: white;
-  color: #010710;
+  background-color:#423853;
+  color: white;
   padding: 10px 20px;
   border-radius: 10px;
   margin-top: 40px;
-  color: #010710;
 }
 
 
@@ -96,4 +93,3 @@ h2 {
   color: white;
   cursor: pointer;
 }
-
