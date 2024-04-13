@@ -20,22 +20,11 @@ WACSi_XkRx3SKxyb9MJN88P9ALPwqzRD4zwzeI-M7z9_xmgS8Q
   color: white;
 }
 
-body {
-  font-family: Arial, sans-serif;
-  transition: background-color 0.5s, color 0.5s;
-}
-
 .dark-mode {
-  background-color: #010710; /* Mørk bakgrunnsfarge */
-  animation: fadeIn 3s ease; /* Animasjon for mørk modus */
-  color: #fff; /* Tekstfarge i mørk modus */
+  background-color: #010710;
+  animation: fadeIn 3s ease;
+  color: #fff;
 }
-
-.light-mode {
-  background-color: #fff; /* Lys bakgrunnsfarge */
-  color: #333; /* Tekstfarge i lys modus */
-}
-
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -45,7 +34,7 @@ body {
   }
 }
 
-.dark-mode-toggle{
+.dark-mode-toggle {
   background-color: #423853;
   padding: 10px 25px;
   font-size: 1.3em;
@@ -64,7 +53,7 @@ nav {
   justify-content: space-between;
   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
 }
-nav p{
+nav p {
   font-size: 1.5em;
 }
 
@@ -95,9 +84,15 @@ ul li a {
   font-size: 40px;
   text-decoration: none;
 }
+.light-mode .logo,
+.light-mode ul li a {
+  color: rgb(0, 0, 0);
+}
+.light-mode nav {
+  background-color: #f4efef;
+}
 
 /*footer-section*/
-
 
 .social-media-container {
   background: linear-gradient(to top, #4c0c54, transparent);
