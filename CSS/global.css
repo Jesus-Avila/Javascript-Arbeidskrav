@@ -34,7 +34,8 @@ WACSi_XkRx3SKxyb9MJN88P9ALPwqzRD4zwzeI-M7z9_xmgS8Q
   }
 }
 
-.dark-mode-toggle {
+.dark-mode-toggle,
+button {
   background-color: #423853;
   padding: 10px 25px;
   font-size: 1.3em;

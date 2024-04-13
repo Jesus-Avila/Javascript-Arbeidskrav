@@ -37,16 +37,6 @@ h1{
 }
 
 
-button {
-  background-color: #423853;
-  padding: 10px 25px;
-  font-size: 1.3em;
-  border-radius: 10px;
-  transition: 0.3s;
-  cursor: pointer;
-  margin-bottom: 10vh;
-}
-
 button:hover {
   background-color: #9a22a57a;
 }
