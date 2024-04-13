@@ -4,25 +4,32 @@ const nav = document.querySelector('nav');
 
 darkModeToggle.addEventListener('click', () => {
   if (body.classList.contains('dark-mode')) {
-    body.classList.remove('dark-mode');
-    nav.classList.remove('dark-mode');
-    body.classList.add('light-mode');
-    nav.classList.add('light-mode'); 
-    localStorage.setItem('mode', 'light');
+    setLightMode();
   } else {
-    body.classList.remove('light-mode');
-    body.classList.add('dark-mode');
-    nav.classList.add('dark-mode');
-    nav.classList.remove('light-mode');
-    localStorage.setItem('mode', 'dark');
+    setDarkMode();
   }
 });
 
+function setDarkMode() {
+  body.classList.remove('light-mode');
+  body.classList.add('dark-mode');
+  nav.classList.add('dark-mode');
+  nav.classList.remove('light-mode');
+  localStorage.setItem('mode', 'dark');
+}
+
+function setLightMode() {
+  body.classList.remove('dark-mode');
+  nav.classList.remove('dark-mode');
+  body.classList.add('light-mode');
+  nav.classList.add('light-mode'); 
+  localStorage.setItem('mode', 'light');
+}
 
 const currentMode = localStorage.getItem('mode');
 
 if (currentMode === 'dark') {
-  body.classList.add('dark-mode');
+  setDarkMode();
 } else {
-  body.classList.remove('dark-mode');
+  setLightMode();
 }
