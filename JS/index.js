@@ -36,7 +36,7 @@ const characterCards = (data) => {
   const characterListDiv = document.getElementById("characterContainer");
   characterListDiv.innerHTML = "";
 
-//Henter ut 50 elementer fra api om gangen
+//Henter ut 150 elementer fra api om gangen
   for (let i = 0; i < Math.min(data.length, 150); i++) {
     const characterDiv = characterCard(data[i], favoriteList);
     characterListDiv.appendChild(characterDiv);
