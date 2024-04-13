@@ -1,5 +1,4 @@
-import { addFavouriteCrud, deleteFavouriteCrud, getFavorite, url, getFavoritesList } from "./helpers.js";
-const baseURL = "https://fortnite-api.com/v2/cosmetics/br/";
+import { addFavouriteCrud, deleteFavouriteCrud, getFavorite, url, getFavoritesList, baseURL } from "./helpers.js";
 const urlCrud = url;
 let data;
 let newCosmeticID;

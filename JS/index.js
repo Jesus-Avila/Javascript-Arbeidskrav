@@ -1,11 +1,11 @@
-import { characterCard, url } from "./helpers.js";
+import { characterCard, url, baseURL } from "./helpers.js";
 let characterData; // Definerer en global variabel for å lagre karakterdata
 let favoriteList;
 
 const fetchData = async () => {
   try {
     const [response, response2] = await Promise.all([
-      fetch("https://fortnite-api.com/v2/cosmetics/br/"),
+      fetch(`${baseURL}`),
       fetch (`${url}`)])//crud api'et
     
     if (!response.ok || !response2.ok) {
