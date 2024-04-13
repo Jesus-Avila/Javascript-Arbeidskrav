@@ -21,9 +21,21 @@ WACSi_XkRx3SKxyb9MJN88P9ALPwqzRD4zwzeI-M7z9_xmgS8Q
 }
 
 body {
-  background-color: #010710;
-  animation: fadeIn 3s ease;
+  font-family: Arial, sans-serif;
+  transition: background-color 0.5s, color 0.5s;
 }
+
+.dark-mode {
+  background-color: #010710; /* Mørk bakgrunnsfarge */
+  animation: fadeIn 3s ease; /* Animasjon for mørk modus */
+  color: #fff; /* Tekstfarge i mørk modus */
+}
+
+.light-mode {
+  background-color: #fff; /* Lys bakgrunnsfarge */
+  color: #333; /* Tekstfarge i lys modus */
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -33,6 +45,14 @@ body {
   }
 }
 
+.dark-mode-toggle{
+  background-color: #423853;
+  padding: 10px 25px;
+  font-size: 1.3em;
+  border-radius: 10px;
+  transition: 0.3s;
+  cursor: pointer;
+}
 /*header*/
 
 nav {
