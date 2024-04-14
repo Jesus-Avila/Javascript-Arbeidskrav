@@ -19,12 +19,13 @@ function setDarkMode() {
   nav.classList.add('dark-mode');
   nav.classList.remove('light-mode');
   localStorage.setItem('mode', 'dark');
-  searchInput.classList.remove('light-mode');
-  searchInput.classList.add('dark-mode');
-  favoriteText.classList.remove('light-mode');
-  favoriteText.classList.add('dark-mode');
-  favouriteList.classList.remove('light-mode');
-  favouriteList.classList.add('dark-mode');
+  //Optional chaining
+  searchInput?.classList.remove('light-mode');
+  searchInput?.classList.add('dark-mode');
+  favoriteText?.classList.remove('light-mode');
+  favoriteText?.classList.add('dark-mode');
+  favouriteList?.classList.remove('light-mode');
+  favouriteList?.classList.add('dark-mode');
 }
 
 function setLightMode() {
@@ -33,12 +34,12 @@ function setLightMode() {
   body.classList.add('light-mode');
   nav.classList.add('light-mode'); 
   localStorage.setItem('mode', 'light');
-  searchInput.classList.remove('dark-mode');
-  searchInput.classList.add('light-mode');
-  favoriteText.classList.remove('dark-mode');
-  favoriteText.classList.add('light-mode');
-  favouriteList.classList.remove('dark-mode');
-  favouriteList.classList.add('light-mode');
+  searchInput?.classList.remove('dark-mode');
+  searchInput?.classList.add('light-mode');
+  favoriteText?.classList.remove('dark-mode');
+  favoriteText?.classList.add('light-mode');
+  favouriteList?.classList.remove('dark-mode');
+  favouriteList?.classList.add('light-mode');
 }
 
 const currentMode = localStorage.getItem('mode');
