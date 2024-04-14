@@ -28,6 +28,7 @@ h1{
     margin: 5vh 0;
 }
 
+.light-mode .favourite-list,
 .light-mode #favoriteText{
   color: black;
 }

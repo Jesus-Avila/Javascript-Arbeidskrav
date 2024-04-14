@@ -3,6 +3,7 @@ const body = document.body;
 const nav = document.querySelector('nav');
 const searchInput = document.getElementById("search-field");
 const favoriteText = document.getElementById("favoriteText");
+const favouriteList = document.getElementById("favoriteList");
 
 darkModeToggle.addEventListener('click', () => {
   if (body.classList.contains('dark-mode')) {
@@ -22,6 +23,8 @@ function setDarkMode() {
   searchInput.classList.add('dark-mode');
   favoriteText.classList.remove('light-mode');
   favoriteText.classList.add('dark-mode');
+  favouriteList.classList.remove('light-mode');
+  favouriteList.classList.add('dark-mode');
 }
 
 function setLightMode() {
@@ -34,6 +37,8 @@ function setLightMode() {
   searchInput.classList.add('light-mode');
   favoriteText.classList.remove('dark-mode');
   favoriteText.classList.add('light-mode');
+  favouriteList.classList.remove('dark-mode');
+  favouriteList.classList.add('light-mode');
 }
 
 const currentMode = localStorage.getItem('mode');
