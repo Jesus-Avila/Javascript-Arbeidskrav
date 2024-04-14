@@ -73,7 +73,13 @@ h2 {
  .search-field {
   background-color: transparent; 
   border: none;
+  color: white;
   border-bottom: 1px solid white;
   border-bottom-width: 1px;
   margin-left: 4.5rem;
+}
+
+.light-mode .search-field{
+  color: black;
+  border-bottom: 1px solid black;
 }
