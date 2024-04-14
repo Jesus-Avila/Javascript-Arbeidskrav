@@ -35,11 +35,12 @@ WACSi_XkRx3SKxyb9MJN88P9ALPwqzRD4zwzeI-M7z9_xmgS8Q
 }
   @supports (-webkit-appearance: none) or (-moz-appearance: none) {
    .dark-mode-toggle  input[type=checkbox] {
-      --active: #0a0a0a;
+      --active: #20263d;
+
       --active-inner: #fff;
-      --focus: 2px #0a0a0a;
+      --focus: 2px#010710;
       --border: #BBC1E1;
-      --border-hover:#0a0a0a;
+      --border-hover:#010710;
       --background: #fff;
       --disabled: #F6F8FF;
       --disabled-inner: #E1E6F9;
