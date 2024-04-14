@@ -220,6 +220,10 @@ ul li a {
   margin-bottom: 10px;
 }
 
+.light-mode .social-media-title{
+  color: black;
+}
+
 .icons {
   display: flex;
   justify-content: center;
