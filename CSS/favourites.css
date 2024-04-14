@@ -28,6 +28,10 @@ h1{
     margin: 5vh 0;
 }
 
+.light-mode #favoriteText{
+  color: black;
+}
+
 .favourites{
   display: flex;
   flex-direction: column;
