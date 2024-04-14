@@ -1,17 +1,3 @@
-/*
-Darktheme palett
-bakgrunnsfarge body/navbar #010710
-footer #071029
-bakgrunnsfarge kort #20263d
-knapper: #383d53
-sidebar osv: #525669
-#6d6f81
-#888a99
-
-WACSi_XkRx3SKxyb9MJN88P9ALPwqzRD4zwzeI-M7z9_xmgS8Q
-
-*/
-
 * {
   margin: 0;
   padding: 0;
@@ -55,7 +41,6 @@ WACSi_XkRx3SKxyb9MJN88P9ALPwqzRD4zwzeI-M7z9_xmgS8Q
       cursor: pointer;
       border: 1px solid var(--bc, var(--border));
       background: var(--b, var(--background));
-      transition: background 0.3s, border-color 0.3s, box-shadow 0.2s;
     }
      .dark-mode-toggle  input[type=checkbox]:after {
       content: "";
